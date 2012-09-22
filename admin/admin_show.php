@@ -52,7 +52,7 @@ include ("header.php");
 					'.$admin['admin_type'].'
 				</td>
 				<td>
-					'; if ($admin['is_experimenter']=='n') echo $lang['n']; else echo $lang['y']; echo '
+					'; if ($admin['experimenter_list']=='n') echo $lang['n']; else echo $lang['y']; echo '
                         	<td>
                                 	<a href="admin_edit.php?admin_id='.$admin['admin_id'].'">'.$lang['edit'].'</a>
                         	</td>
