@@ -1,7 +1,7 @@
 # CronTab for ORSEE
 # edit the ORSEEROOT and PHPEXECUTABLE to fit your needs !
 
-ORSEEROOT=/home/jrhorn424/public/smith.failuretorefrain.com/public/orsee
+ORSEEROOT=/Users/jrhorn424/Sites/orsee.local
 PHPEXECUTABLE=/usr/bin/php
 SHELL=/bin/sh
 
