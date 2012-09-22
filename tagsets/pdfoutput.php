@@ -108,14 +108,14 @@ function pdfoutput__make_part_list($experiment_id,$session_id,$focus,$sort="",$f
 		if ($p['gender']=='m') $row[]=$lang['gender_m_abbr'];
 			elseif ($p['gender']=='f') $row[]=$lang['gender_f_abbr'];
 			else $row[]="?";
-		$row[]= ($p['field_of_studies']>0) ? 
-				$studies[$p['field_of_studies']].' ('.$p['begin_of_studies'].')' : 
+		$row[]= ($p['field_of_studies']>0) ?
+				$studies[$p['field_of_studies']].' ('.$p['begin_of_studies'].')' :
 				$professions[$p['profession']];
 		$row[]=$p['number_noshowup'].'/'.$p['number_reg'];
 		if ($assigned || $invited) $row[]=$p['invited'];
 		if ($registered || $shownup || $participated) {
 			if (!$session_id) {
-				if (!isset($session_names[$p['session_id']])) 
+				if (!isset($session_names[$p['session_id']]))
 					$session_names[$p['session_id']]=session__build_name($p);
 				$row[]=$session_names[$p['session_id']];
 				}
@@ -129,7 +129,7 @@ function pdfoutput__make_part_list($experiment_id,$session_id,$focus,$sort="",$f
         // prepare pdf
         include_once('../tagsets/class.ezpdf.php');
 
-        $pdf =& new Cezpdf('a4','landscape');
+        $pdf = new Cezpdf('a4','landscape');
 
         $pdf->selectFont('../tagsets/fonts/Times-Roman.afm');
 
@@ -183,7 +183,7 @@ function pdfoutput__make_calendar($caltime=0,$calyear=false,$admin=false,$forwar
 	// prepare pdf
 	include_once('../tagsets/class.ezpdf.php');
 
-	$pdf =& new Cezpdf('a4');
+	$pdf = new Cezpdf('a4');
 
 	$pdf->selectFont('../tagsets/fonts/Times-Roman.afm');
 
@@ -224,10 +224,10 @@ function pdfoutput__make_calendar($caltime=0,$calyear=false,$admin=false,$forwar
 	if ($file) {
 		$pdffilecode = $pdf->output();
 
-		return $pdffilecode;	
+		return $pdffilecode;
   		/*
   		$fname ="/apache/orsee/admin/pdfdir/test.pdf";
-  
+
   		$fp = fopen($fname,'w');
   			fwrite($fp,$pdffilecode);
   		fclose($fp);
@@ -310,7 +310,7 @@ function pdfoutput__calendar_get_month_table($time=0,$admin=false) {
 	$i=0;
  	$wday=1; $las1=array(); $las2=array();
   	while ($i<$first_day) {
-    		$las1[$wday]=""; $las2[$wday]=""; 
+    		$las1[$wday]=""; $las2[$wday]="";
     		$i++; $wday++;
   	}
 
@@ -339,7 +339,7 @@ function pdfoutput__calendar_get_month_table($time=0,$admin=false) {
 
 			$las2[$wday].="\n"."<i>".laboratories__strip_lab_name(stripslashes($entry[$lang['lang']]))."</i>\n";
 
-        		if ($admin) 
+        		if ($admin)
 				$las2[$wday].="<b>".$entry['experiment_name']."</b>";
                   		else $las2[$wday].="<b>".$entry['experiment_public_name']."</b>";
 			$las2[$wday].="\n";

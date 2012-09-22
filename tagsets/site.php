@@ -9,7 +9,7 @@ return $test;
 
 
 function load_settings() {
-$query="SELECT * FROM ".table('options')." 
+$query="SELECT * FROM ".table('options')."
 	WHERE option_type='general' OR option_type='default'";
 
 $result=mysql_query($query);
@@ -60,7 +60,7 @@ function create_new_option($option_array) {
 
 
 function load_colors_old() {
-$query="SELECT * FROM ".table('options')." 
+$query="SELECT * FROM ".table('options')."
         WHERE option_type='color'";
 
 $result=mysql_query($query);
@@ -82,7 +82,7 @@ function load_colors() {
 
 	// parse file
 	foreach ($colorfile as $line) {
-		if (!($line && substr($line,0,1)!="#")) continue; 
+		if (!($line && substr($line,0,1)!="#")) continue;
 		$citems=explode(":",$line);
 		if (!(trim($citems[0]) && trim($citems[1]))) continue;
 		$color[trim($citems[0])]=trim($citems[1]);
@@ -137,7 +137,7 @@ function show_message() {
 				$color['message_border'].'" noshade width=400 CELLPADDING="2" CELLSPACING="0">
       				 <tr>
         				<td align=center>
-          				<table bgcolor="'.$color['message_background'].'" 
+          				<table bgcolor="'.$color['message_background'].'"
                 				border=0 width=100% CELLPADDING="4" CELLSPACING="0">
             					<tr valign=top>
             					<td align=right> <font color="'.$color['message_text'].'"><b>';
@@ -175,7 +175,7 @@ include($settings__root_directory."/lang/".$new_lang."/words.lang");
 function redirect($url) {
 global $settings__root_url;
 
-if (eregi("http://",substr($url,0,7))) {
+if (preg_match("@http://@i",substr($url,0,7))) {
 	header("Location: ".$url);
 	} else {
 	$newurl=$settings__root_url."/".$url;

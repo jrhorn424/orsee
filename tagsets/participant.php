@@ -6,7 +6,7 @@ function participants__count_participants($constraint="") {
 	if ($constraint) $where_clause=" AND ".$constraint;
 		else $where_clause="";
      	$query="SELECT COUNT(participant_id) as pcount
-      		FROM ".table('participants')." 
+      		FROM ".table('participants')."
       		WHERE deleted='n' ".$where_clause;
 	$line=orsee_query($query);
 	return $line['pcount'];
@@ -24,7 +24,7 @@ function participants__count_participants_temp($constraint="") {
 
 // check if participant_id exists in participants table
 function participant__participant_id_exists($pid) {
-                $query="SELECT participant_id FROM ".table('participants')." 
+                $query="SELECT participant_id FROM ".table('participants')."
                         WHERE participant_id=".$pid;
                 $line=orsee_query($query);
                 if (isset($line['participant_id'])) $exists=true; else $exists=false;
@@ -38,31 +38,31 @@ function participant__create_participant_id() {
 	   srand ((double)microtime()*1000000);
            while ($gibtsschon) {
            	$crypt_id = "/";
-           	while (eregi("(/|\\.)",$crypt_id)) { //<or <match <get-var crypt_id> "/"> <match <get-var crypt_id> "\\.">>>
+           	while (preg_match("/(/|\\.)/i",$crypt_id)) { //<or <match <get-var crypt_id> "/"> <match <get-var crypt_id> "\\.">>>
            		$participant_id = rand();
            		$crypt_id=unix_crypt($participant_id);
            		}
 
-                $query="SELECT participant_id FROM ".table('participants')." 
+                $query="SELECT participant_id FROM ".table('participants')."
                  	WHERE participant_id=".$participant_id;
 		$line=orsee_query($query);
                 if (isset($line['participant_id'])) $gibtsschon=true; else $gibtsschon=false;
 
                 if (!$gibtsschon) {
-                	$query="SELECT participant_id FROM ".table('participants_temp')." 
+                	$query="SELECT participant_id FROM ".table('participants_temp')."
                  		WHERE participant_id=".$participant_id;
                 	$line=orsee_query($query);
-                	if (isset($line['participant_id'])) $gibtsschon=true; else $gibtsschon=false;	
+                	if (isset($line['participant_id'])) $gibtsschon=true; else $gibtsschon=false;
                 	}
 
                 if (!$gibtsschon) {
-                	$query="SELECT participant_id FROM ".table('participants_os')." 
+                	$query="SELECT participant_id FROM ".table('participants_os')."
                  		WHERE participant_id=".$participant_id;
                         $line=orsee_query($query);
                         if (isset($line['participant_id'])) $gibtsschon=true; else $gibtsschon=false;
                 	}
           	}
-	return $participant_id; 
+	return $participant_id;
 }
 
 // create new id and replace old id with it
@@ -108,7 +108,7 @@ function participant__form_fname() {
 function participant__check_exist($varname,$required) {
 global $errors__dataform;
         if ($required=="y") {
-                if (!(isset($_REQUEST[$varname]) && $_REQUEST[$varname])) 
+                if (!(isset($_REQUEST[$varname]) && $_REQUEST[$varname]))
                 	$errors__dataform[]=$varname;
         }
 }
@@ -142,7 +142,7 @@ function participant__check_email($required) {
 	participant__check_exist("email",$required);
 	global $errors__dataform, $lang;
 	if ($_REQUEST['email']) {
-		$isok=eregi("^[^@ \t\r\n]+@[-_0-9a-zA-Z]+\\.[^@ \t\r\n]+$",$_REQUEST['email']);
+		$isok=preg_match("/^[^@ \t\r\n]+@[-_0-9a-zA-Z]+\\.[^@ \t\r\n]+$/i",$_REQUEST['email']);
 		if (!$isok) {
 			$errors__dataform[]="email";
 			message($lang['email_address_not_ok']);
@@ -176,7 +176,7 @@ function participant__form_phone_number() {
 	global $form__type, $lang;
 	tpr("phone_number");
 	echo '<TD>'.$lang['phone_number'].':';
-	if (!ereg("admin",$form__type)) 
+	if (!preg_match("/admin/",$form__type))
 		echo '<BR><FONT class="small">'.$lang['phone_number_remark'].'</FONT>';
 	echo '</TD>
 	      <TD><INPUT name=phone_number type=text size=20 maxlength=30 value="'.$_REQUEST['phone_number'].'"></TD>
@@ -205,7 +205,7 @@ function participant__form_address() {
 			$_REQUEST['address_city'].'"></TD>
 	     </TR>';
 	tpr("address");
-	echo '<TD></TD><TD>'.$lang['country'].': 
+	echo '<TD></TD><TD>'.$lang['country'].':
 	      <INPUT name=address_country type=text size=20 maxlength=50 value="'.$_REQUEST['address_country'].'"></TD>
 	     </TR>';
 }
@@ -275,7 +275,7 @@ function participant__check_work($required) {
 	global $subpool, $errors__dataform, $lang;
 	if ($required=="y") {
 
-  		if ($subpool['subpool_type']=="w" && $_REQUEST['profession']==0) 
+  		if ($subpool['subpool_type']=="w" && $_REQUEST['profession']==0)
                 	$errors__dataform[]="profession";
 
   		if ($subpool['subpool_type']=="s" && $_REQUEST['field_of_studies']==0)
@@ -288,7 +288,7 @@ function participant__check_work($required) {
                 		$errors__dataform[]="studies_prof_admin";
 			if ( (!($_REQUEST['field_of_studies'] == 0)) && (!$_REQUEST['begin_of_studies']))
 				$errors__dataform[]="begin_of_studies";
-			} 
+			}
 		}
 
 	if ($_REQUEST['profession'] != 0 && $_REQUEST['field_of_studies'] != 0) {
@@ -396,7 +396,7 @@ function tpr($fieldname) {
 global $errors__dataform, $color;
   if (!isset($errors__dataform)) $errors__dataform=array();
   echo '<TR';
-  if (in_array($fieldname,$errors__dataform)) 
+  if (in_array($fieldname,$errors__dataform))
                 echo ' bgcolor="'.$color['missing_field'].'"';
   echo '>';
 }
@@ -405,9 +405,9 @@ global $errors__dataform, $color;
 function participant__form($form_title="",$button_title="",$form_type="") {
 	global $lang, $subpool, $settings;
 
-	$admin=ereg("admin",$form_type);
+	$admin=preg_match("/admin/",$form_type);
 
-        if (!$_REQUEST['subpool_id']) 
+        if (!$_REQUEST['subpool_id'])
 		$_REQUEST['subpool_id']=$settings['subpool_default_registration_id'];
 
 	$subpool=orsee_db_load_array("subpools",$_REQUEST['subpool_id'],"subpool_id");
@@ -421,7 +421,7 @@ function participant__form($form_title="",$button_title="",$form_type="") {
 
 	echo '<FORM action="'.thisdoc().'">';
 
-	if ($admin)  
+	if ($admin)
 		echo '<INPUT type=hidden name=participant_id value="'.$_REQUEST['participant_id'].'">';
 	   else echo '<INPUT type=hidden name=p value="'.unix_crypt($_REQUEST['participant_id']).'">';
 
@@ -429,7 +429,7 @@ function participant__form($form_title="",$button_title="",$form_type="") {
 	echo '<INPUT type=hidden name=s value="'.$_REQUEST['s'].'">';
 	echo '<INPUT type=hidden name=dr value="'.$_REQUEST['dr'].'">';
 
-	if (!$admin) 
+	if (!$admin)
 		echo '<INPUT type=hidden name=subpool_id value="'.$_REQUEST['subpool_id'].'">';
 
 	echo '<TABLE width=90%>';
@@ -445,7 +445,7 @@ function participant__form($form_title="",$button_title="",$form_type="") {
 
 	participant__form_invitations($admin);
 
-	if (!$admin) 
+	if (!$admin)
 		echo '<TR><TD></TD><TD>'.$lang['optional_fields_follow'].'</TD></TR>';
 
 	participant__form_phone_number();
@@ -455,7 +455,7 @@ function participant__form($form_title="",$button_title="",$form_type="") {
 	if (!$admin) {
 
 		switch ($subpool['subpool_type']) {
-			case "w": participant__form_profession(); 
+			case "w": participant__form_profession();
 				  break;
 			case "s": participant__form_field_of_studies();
 				  participant__form_begin_of_studies();
@@ -475,12 +475,12 @@ function participant__form($form_title="",$button_title="",$form_type="") {
 		participant__form_remarks();
 		}
 
-	if (ereg("admin-add",$form_type)) participant__form_add_to_session();
+	if (preg_match("/admin-add/",$form_type)) participant__form_add_to_session();
 
 	echo '</TABLE>';
 
 	echo '<TABLE>
-		<TR><TD COLSPAN=2><INPUT name=add type=submit 
+		<TR><TD COLSPAN=2><INPUT name=add type=submit
 		value="'.$button_title.'">
 		</TD></TR>
 		</table>
@@ -515,7 +515,7 @@ function participant__get_field_of_studies($studies_id,$language="") {
 
 function participant__deleted($pid) {
        $query="SELECT deleted
-               FROM ".table('participants')." 
+               FROM ".table('participants')."
                WHERE participant_id='".$pid."'";
 	$line=orsee_query($query);
         if ($line['deleted']=="y") $result=true; else $result=false;
@@ -524,7 +524,7 @@ function participant__deleted($pid) {
 
 function participant__excluded($pid) {
         $query="SELECT excluded
-                FROM ".table('participants')." 
+                FROM ".table('participants')."
                 WHERE participant_id='".$pid."'";
         $line=orsee_query($query);
         if ($line['excluded']=="y") $result=true; else $result=false;
@@ -541,7 +541,7 @@ function participant__exclude_participant($participant) {
 
         $query="UPDATE ".table('participants')."
 		SET excluded='y', deleted='y',
-		remarks='".mysql_escape_string($notice)."' 
+		remarks='".mysql_escape_string($notice)."'
                 WHERE participant_id='".$participant['participant_id']."'";
         $done=mysql_query($query);
 
@@ -590,7 +590,7 @@ function participants__stat_laboratory($participant_id) {
 
 	$query="SELECT *
 		FROM ".table('experiments').", ".table('sessions').", ".table('participate_at')."
-        	WHERE ".table('participate_at').".session_id=".table('sessions').".session_id 
+        	WHERE ".table('participate_at').".session_id=".table('sessions').".session_id
 		AND ".table('experiments').".experiment_id=".table('participate_at').".experiment_id
 		AND participant_id = '".$participant_id."'
 		AND experiment_type='laboratory'
@@ -633,7 +633,7 @@ function participants__stat_laboratory($participant_id) {
 		if ($p['registered']!='y') $last_reg_time=sessions__get_registration_end("","",$p['experiment_id']);
 		if ($p['registered']=='y' || $last_reg_time > $now) {
 			echo '<TR';
-				if ($shade) echo ' bgcolor="'.$color['list_shade1'].'"'; 
+				if ($shade) echo ' bgcolor="'.$color['list_shade1'].'"';
 						else echo ' bgcolor="'.$color['list_shade2'].'"';
 			echo '>
 				<TD>
@@ -689,7 +689,7 @@ function participants__stat_online_survey($participant_id) {
 	global $lang, $color;
 
 	$query="SELECT *
-      		FROM ".table('experiments').", ".table('participate_at').", ".table('os_properties')." 
+      		FROM ".table('experiments').", ".table('participate_at').", ".table('os_properties')."
         	WHERE ".table('experiments').".experiment_id=".table('participate_at').".experiment_id
 		AND participant_id = '".$participant_id."'
 		AND ".table('os_properties').".experiment_id = ".table('experiments').".experiment_id
@@ -725,7 +725,7 @@ function participants__stat_online_survey($participant_id) {
 		$survey_end_time=survey__get_stop_unixtime("",$p);
 		if ($p['participated']=='y' || ($survey_end_time && $survey_end_time > $now)) {
 			echo '<TR';
-                                if ($shade) echo ' bgcolor="'.$color['list_shade1'].'"'; 
+                                if ($shade) echo ' bgcolor="'.$color['list_shade1'].'"';
 					else echo ' bgcolor="'.$color['list_shade2'].'"';
                         echo '>
                                 <TD>

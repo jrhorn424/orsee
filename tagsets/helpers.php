@@ -1,7 +1,7 @@
 <?php
 
 // helper functions for use by other functions. part of orsee. see orsee.org
-// 
+//
 
 function getmicrotime()
 {
@@ -118,7 +118,7 @@ return $unixtime;
 }
 
 
-function time__format($lang,$ttime,$hide_date=false,$hide_time=false,$hide_second=true,$hide_year=false,$unixtime="") { 
+function time__format($lang,$ttime,$hide_date=false,$hide_time=false,$hide_second=true,$hide_year=false,$unixtime="") {
 
 	if ($unixtime) $ta=time__unixtime_to_time_package($unixtime);
 		else $ta=$ttime;
@@ -126,7 +126,7 @@ function time__format($lang,$ttime,$hide_date=false,$hide_time=false,$hide_secon
 	$ta['day']=helpers__pad_number($ta['day'],2);
 	$ta['month']=helpers__pad_number($ta['month'],2);
 	$ta['year']=helpers__pad_number($ta['year'],4);
-    if (isset($ta['minute']) && (string) $ta['minute']!="" && isset($ta['hour']) && (string) $ta['hour']!="") { 
+    if (isset($ta['minute']) && (string) $ta['minute']!="" && isset($ta['hour']) && (string) $ta['hour']!="") {
 					  $time_ex=true;
 					  $ta['hour']=helpers__pad_number($ta['hour'],2);
 					  $ta['minute']=helpers__pad_number($ta['minute'],2);
@@ -188,7 +188,7 @@ function time__format($lang,$ttime,$hide_date=false,$hide_time=false,$hide_secon
 
 }
 
- 
+
 function helpers__pad_number() {
 
 if (func_num_args()>0) { $help=func_get_arg(0); $number="$help"; } else { $number="1"; }
@@ -212,7 +212,7 @@ function get_unique_id($table,$idcol) {
            srand ((double)microtime()*1000000);
            while ($exists) {
                 $crypt_id = "/";
-                while (eregi("(/|\\.)",$crypt_id)) {
+                while (preg_match("/(/|\\.)/i",$crypt_id)) {
                         $id = rand();
                         $crypt_id=unix_crypt($id);
                         }
@@ -241,16 +241,16 @@ function url_cr_encode($var) {
 
 // Url-Decode
 function url_cr_decode($value,$temp=false) {
-	$decoded=""; 
+	$decoded="";
 	if ($temp) {
-		$query="SELECT participant_id FROM ".table('participants_temp')." 
+		$query="SELECT participant_id FROM ".table('participants_temp')."
                 	WHERE participant_id_crypt='".$value."'";
 		$decarray=orsee_query($query);
 		$decoded=$decarray['participant_id'];
 	}
 
 	if (!$decoded) {
-		$query="SELECT participant_id FROM ".table('participants')." 
+		$query="SELECT participant_id FROM ".table('participants')."
                  	WHERE participant_id_crypt='".$value."'";
 		$decarray=orsee_query($query);
 		$decoded=$decarray['participant_id'];

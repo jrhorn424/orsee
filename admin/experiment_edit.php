@@ -4,7 +4,7 @@ ob_start();
 $menu__area="experiments_new";
 $title="edit experiment";
 include ("header.php");
-              
+
 echo '<center><h4>'.$lang['edit_experiment'].'</h4></center>';
 
 
@@ -12,7 +12,7 @@ echo '<center><h4>'.$lang['edit_experiment'].'</h4></center>';
 		$allow=check_allow('experiment_edit','experiment_show.php?experiment_id='.$_REQUEST['experiment_id']);
       		$edit=orsee_db_load_array("experiments",$_REQUEST['experiment_id'],"experiment_id");
 		$edit['experiment_show_type']=$edit['experiment_type'].','.$edit['experiment_ext_type'];
-		if (!check_allow('experiment_restriction_override')) 
+		if (!check_allow('experiment_restriction_override'))
 			check_experiment_allowed($edit,"admin/experiment_show.php?experiment_id=".$edit['experiment_id']);
 		}
 	   else {
@@ -22,7 +22,7 @@ echo '<center><h4>'.$lang['edit_experiment'].'</h4></center>';
 	$continue=true;
 
 	if ($_REQUEST['edit']) {
- 
+
 		if (isset($_REQUEST['experimenter_list'])) {
 			$texperimenter=array();
 			foreach ($_REQUEST['experimenter_list'] as $key=>$value) {
@@ -52,7 +52,7 @@ echo '<center><h4>'.$lang['edit_experiment'].'</h4></center>';
                         $continue=false;
                         }
 
-  		if (!eregi("^[^@ \t\r\n]+@[-_0-9a-zA-Z]+\\.[^@ \t\r\n]+$",$_REQUEST['sender_mail'])) {
+  		if (!preg_match("/^[^@ \t\r\n]+@[-_0-9a-zA-Z]+\\.[^@ \t\r\n]+$/i",$_REQUEST['sender_mail'])) {
 			message($lang['error_no_valid_sender_mail']);
         		$continue=false;
 			}
@@ -82,10 +82,10 @@ echo '<center><h4>'.$lang['edit_experiment'].'</h4></center>';
 			$_REQUEST['experiment_type']=$exptypes[0];
 			$_REQUEST['experiment_ext_type']=$exptypes[1];
 
-   			$edit=$_REQUEST; 
+   			$edit=$_REQUEST;
 
    			$done=orsee_db_save_array($edit,"experiments",$edit['experiment_id'],"experiment_id");
-   	
+
 			if ($done) {
        				message ($lang['changes_saved']);
 				redirect ("admin/experiment_edit.php?experiment_id=".$edit['experiment_id']);
@@ -93,9 +93,9 @@ echo '<center><h4>'.$lang['edit_experiment'].'</h4></center>';
 			   else {
    				message ($lang['database_error']);
 				redirect ("admin/experiment_edit.php?experiment_id=".$edit['experiment_id']);
-   				}		
+   				}
 
-			} 
+			}
 
 		$edit=$_REQUEST;
 
@@ -114,7 +114,7 @@ echo '<center><h4>'.$lang['edit_experiment'].'</h4></center>';
            srand ((double)microtime()*1000000);
            while ($gibtsschon) {
                 $crypt_id = "/";
-                while (eregi("(/|\\.)",$crypt_id)) { //<or <match <get-var crypt_id> "/"> <match <get-var crypt_id> "\\.">>>
+                while (preg_match("/(/|\\.)/i",$crypt_id)) { //<or <match <get-var crypt_id> "/"> <match <get-var crypt_id> "\\.">>>
                         $exp_id = rand();
                         $crypt_id=unix_crypt($exp_id);
                         }
@@ -145,7 +145,7 @@ echo '<center><h4>'.$lang['edit_experiment'].'</h4></center>';
 					'.$lang['internal_name'].':
 				</TD>
 				<TD>
-					<INPUT name=experiment_name type=text size=40 maxlength=100 value="'.stripslashes($edit['experiment_name']).'"> 
+					<INPUT name=experiment_name type=text size=40 maxlength=100 value="'.stripslashes($edit['experiment_name']).'">
 					'.help("experiment_name").'
 				</TD>
 			</TR>';
@@ -156,7 +156,7 @@ echo '<center><h4>'.$lang['edit_experiment'].'</h4></center>';
 					'.$lang['public_name'].':
 				</TD>
 				<TD>
-					<INPUT name=experiment_public_name type=text size=40 maxlength=100 
+					<INPUT name=experiment_public_name type=text size=40 maxlength=100
 					value="'.stripslashes($edit['experiment_public_name']).'">
 					'.help("experiment_public_name").'
 				</TD>
@@ -168,8 +168,8 @@ echo '<center><h4>'.$lang['edit_experiment'].'</h4></center>';
 					'.$lang['description'].':
 				</TD>
 				<TD>
-					<textarea name=experiment_description rows=5 cols=30 
-					wrap=virtual>'.stripslashes($edit['experiment_description']).'</textarea> 
+					<textarea name=experiment_description rows=5 cols=30
+					wrap=virtual>'.stripslashes($edit['experiment_description']).'</textarea>
 					'.help("experiment_description").'
 				</TD>
 			</TR>';
@@ -195,7 +195,7 @@ echo '<center><h4>'.$lang['edit_experiment'].'</h4></center>';
 						}
 					}
 
-			echo '		</SELECT> 
+			echo '		</SELECT>
 					'.help("experiment_type").'
 				</TD>
 			</TR>';
@@ -254,7 +254,7 @@ echo '<center><h4>'.$lang['edit_experiment'].'</h4></center>';
 					value="';
 					if ($edit['sender_mail']) echo stripslashes($edit['sender_mail']);
 						else echo $settings['support_mail'];
-					echo '"> 
+					echo '">
 					'.help("email_sender_address").'
 				</TD>
 			</TR>';
@@ -267,7 +267,7 @@ echo '<center><h4>'.$lang['edit_experiment'].'</h4></center>';
 				<TD>
 					<INPUT name=experiment_finished type=checkbox value="y"';
 					if ($edit['experiment_finished']=="y") echo " CHECKED";
-					echo '> 
+					echo '>
 					'.help("experiment_finished").'
 				</TD>
 			</TR>';
@@ -277,9 +277,9 @@ echo '<center><h4>'.$lang['edit_experiment'].'</h4></center>';
 					'.$lang['hide_in_stats?'].'
 				</TD>
 				<TD>
-					<INPUT name=hide_in_stats type=checkbox value="y"'; 
+					<INPUT name=hide_in_stats type=checkbox value="y"';
 					if ($edit['hide_in_stats']=="y") echo " CHECKED";
-					echo '> 
+					echo '>
 					'.help("experiment_hide_in_stats").'
 				</TD>
 			</TR>';
@@ -291,7 +291,7 @@ echo '<center><h4>'.$lang['edit_experiment'].'</h4></center>';
 				<TD>
 					<INPUT name=hide_in_cal type=checkbox value="y"';
 					if ($edit['hide_in_cal']=="y") echo " CHECKED";
-					echo '> 
+					echo '>
 					'.help("experiment_hide_in_cal").'
 				</TD>
 			</TR>';
@@ -310,7 +310,7 @@ echo '<center><h4>'.$lang['edit_experiment'].'</h4></center>';
 
 	echo '		<TR>
 				<TD COLSPAN=2 align=center>
-					<INPUT name=edit type=submit 
+					<INPUT name=edit type=submit
 					value="';
 					if (!$_REQUEST['experiment_id']) echo $lang['add'];
 						else echo $lang['change'];
@@ -336,11 +336,11 @@ echo '<center><h4>'.$lang['edit_experiment'].'</h4></center>';
 			</FORM>';
 		}
 
-	if ($_REQUEST['experiment_id']) 
+	if ($_REQUEST['experiment_id'])
 		echo '	<BR><BR>
 			<A HREF="experiment_show.php?experiment_id='.$_REQUEST['experiment_id'].'">'
 			.$lang['mainpage_of_this_experiment'].'</A>';
-	
+
 	echo '</center>';
 
 

@@ -79,7 +79,7 @@ function tab_menu($menu_items,$orientation="vertical",$current_user_data_box="",
 
 	if (isset($_REQUEST['p']) && !(thisdoc()=="participant_create.php")) {
                 $addp="?p=".urlencode($_REQUEST['p']);
-        	} 
+        	}
 	   else {
                 $addp="";
         	}
@@ -105,14 +105,14 @@ function tab_menu($menu_items,$orientation="vertical",$current_user_data_box="",
 
         	if (isset($info[4]) && $info[4]) $icon=$info[4];
         	if (isset($info[5]) && $info[5]) $target=$info[5];
-        	if (isset($color['menu_item_highlighted_background']) && eregi("^".$info[1].".*",$menu__area) &&
-                                eregi("link",$info[0]))
+        	if (isset($color['menu_item_highlighted_background']) && preg_match("/^".$info[1].".*/i",$menu__area) &&
+                                preg_match("/link/i",$info[0]))
                 		$bgcolor=' BGCOLOR="'.$color['menu_item_highlighted_background'].'"';
            				else $bgcolor='';
 
 		$list.='<TR>';
 
-        	if (eregi("head",$info[0])) {
+        	if (preg_match("/head/i",$info[0])) {
 
                 	$list.='<td colspan=3>&nbsp;</td></tr><TR>
                         	<td'; if ($icon && $showicons) $list.=$bgcolor; $list.='>';
@@ -134,7 +134,7 @@ function tab_menu($menu_items,$orientation="vertical",$current_user_data_box="",
         		}
 
 			$hlist[$hlist_cl].='<TD ';
-				if ($info[2]=='current_user_data_box') $hlist[$hlist_cl].=' rowspan=2'; 
+				if ($info[2]=='current_user_data_box') $hlist[$hlist_cl].=' rowspan=2';
 				if ($icon && $showicons) $hlist[$hlist_cl].=$bgcolor;
 				if ($hlist_cl==1) $$hlist[$hlist_cl].=' valign=bottom'; else $hlist[$hlist_cl].=' valign=top';
 				$hlist[$hlist_cl].='>';
@@ -144,13 +144,13 @@ function tab_menu($menu_items,$orientation="vertical",$current_user_data_box="",
 				if ($hlist_cl==1) $$hlist[$hlist_cl].=' valign=bottom'; else $hlist[$hlist_cl].=' valign=top';
 				$hlist[$hlist_cl].='>';
 
-        	if (eregi("link",$info[0])) {
+        	if (preg_match("/link/i",$info[0])) {
     			$list.= '<A HREF="'.$info[3].'" target="'.$target.'" class="menu_item"><FONT color="'.$color['menu_item'].'">';
 			$hlist[$hlist_cl].='<A HREF="'.$info[3].'" target="'.$target.'" class="menu_item"><FONT color="'.
 					$color['menu_item'].'">';
 			}
 
-        	if (eregi("head",$info[0])) {
+        	if (preg_match("/head/i",$info[0])) {
                 	$list.= '<FONT class="menu_title"><FONT color="'.$color['menu_title'].'">';
 			$hlist[$hlist_cl].='<FONT class="menu_title"><FONT color="'.$color['menu_title'].'">';
 			}
@@ -164,12 +164,12 @@ function tab_menu($menu_items,$orientation="vertical",$current_user_data_box="",
 				$hlist[$hlist_cl].= $lang[$info[2]];
 				}
 
-        	if (eregi("head",$info[0])) {
+        	if (preg_match("/head/i",$info[0])) {
                 	$list.= '</FONT></FONT>';
 			$hlist[$hlist_cl].= '</FONT></FONT>';
 			}
 
-        	if (eregi("link",$info[0])) {
+        	if (preg_match("/link/i",$info[0])) {
                 	$list.= '</FONT></A>';
 			$hlist[$hlist_cl].= '</FONT></A>';
 			}
@@ -207,9 +207,9 @@ function get_style_array() {
 
    	$dir_arr = array () ;
    	$handle=opendir($path);
-   	while ($file = readdir($handle)) {            
-         	if ($file != "." && $file != ".." && is_dir($path."/".$file)) {                    
-           		$dir_arr[] = $file ;        
+   	while ($file = readdir($handle)) {
+         	if ($file != "." && $file != ".." && is_dir($path."/".$file)) {
+           		$dir_arr[] = $file ;
        			}
    		}
    	return $dir_arr ;
