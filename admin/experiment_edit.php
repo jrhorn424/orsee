@@ -114,7 +114,7 @@ echo '<center><h4>'.$lang['edit_experiment'].'</h4></center>';
            srand ((double)microtime()*1000000);
            while ($gibtsschon) {
                 $crypt_id = "/";
-                while (preg_match("/(/|\\.)/i",$crypt_id)) { //<or <match <get-var crypt_id> "/"> <match <get-var crypt_id> "\\.">>>
+                while (preg_match("@(/|\\.)@",$crypt_id)) { //<or <match <get-var crypt_id> "/"> <match <get-var crypt_id> "\\.">>>
                         $exp_id = rand();
                         $crypt_id=unix_crypt($exp_id);
                         }
