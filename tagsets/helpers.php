@@ -212,7 +212,7 @@ function get_unique_id($table,$idcol) {
            srand ((double)microtime()*1000000);
            while ($exists) {
                 $crypt_id = "/";
-                while (preg_match("/(/|\\.)/i",$crypt_id)) {
+                while (preg_match("@(/|\\.)@i",$crypt_id)) {
                         $id = rand();
                         $crypt_id=unix_crypt($id);
                         }
