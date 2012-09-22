@@ -1,7 +1,7 @@
 <?php
 
 include ("nonoutputheader.php");
-$pagetitle.=$lang['help'].": ".ereg_replace("_"," ",$_REQUEST['topic']);
+$pagetitle.=$lang['help'].": ".preg_replace("/_/"," ",$_REQUEST['topic']);
 html__header();
 
 include ("../style/".$settings['style']."/help_html_header.php");
@@ -17,7 +17,7 @@ include ("../style/".$settings['style']."/help_html_header.php");
 			</TR>';
 
      		$query="SELECT *
-      			FROM ".table('admin')." 
+      			FROM ".table('admin')."
       			ORDER BY lname, fname, adminname";
 		$result=mysql_query($query) or die("Database error: " . mysql_error());
 
@@ -48,7 +48,7 @@ include ("../style/".$settings['style']."/help_html_header.php");
 		   else {
 			$line = mysql_fetch_assoc($result);
 			if ($line[$expadmindata['language']]) $thislang=$expadmindata['language'];
-				elseif ($line[$settings['admin_standard_language']]) $thislang=$settings['admin_standard_language']; 
+				elseif ($line[$settings['admin_standard_language']]) $thislang=$settings['admin_standard_language'];
 				else $thislang="en";
 
             		echo str_replace("\n","<BR>",stripslashes($line[$thislang]));

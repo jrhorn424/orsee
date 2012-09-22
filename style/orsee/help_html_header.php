@@ -11,14 +11,14 @@
 		<IMG border=0 SRC="<?php echo $settings__root_url; ?>/style/orsee/help_logo.gif">
 		</TD>
 	<TD valign=middle align=center>
-		<FONT face="Arial" COLOR="#FFFFFF"><?php echo ereg_replace("_"," ",$_REQUEST['topic']); ?></FONT>
+		<FONT face="Arial" COLOR="#FFFFFF"><?php echo preg_replace("/_/"," ",$_REQUEST['topic']); ?></FONT>
 	</TD>
 	</TR>
 
         <TR VALIGN=TOP ALIGN=LEFT BGCOLOR="#8080FF">
         <TD COLSPAN=2 WIDTH=100% HEIGHT=10 ALIGN=RIGHT VALIGN=BOTTOM>
         &nbsp;
-        </TD>   
+        </TD>
         </TR>
 	<TR><TD bgcolor=snow colspan=2>&nbsp;</TD></TR>
 	<TR><TD width=100% bgcolor=snow colspan=2 width=100%>
