@@ -22,7 +22,7 @@ include("header.php");
 		';
 
 	if (isset($_REQUEST['adminname']) && isset($_REQUEST['password'])) {
-		$password=unix_crypt($_REQUEST['password']);
+		$password=$_REQUEST['password'];
 		$logged_in=admin__check_login($_REQUEST['adminname'],$password);
 		if ($logged_in) {
 			$expadmindata['admin_id']=$_SESSION['expadmindata']['admin_id'];

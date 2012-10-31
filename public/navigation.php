@@ -1,10 +1,10 @@
-// navigation.php. part of orsee. see orsee.org. 
+// navigation.php. part of orsee. see orsee.org.
 //
 // menu entry format:
 //     0         1          2      3   4     5     6        7          8
 // entrytype|menu__area|lang_item|url|icon|target|addp?|showonlyifp?|hideifp?
 
- 
+
 headlink|mainpage|mainpage|/public/index.php|||true
 
 link|public_register|register|/public/participant_create.php|||||true
