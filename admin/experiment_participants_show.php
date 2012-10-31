@@ -12,7 +12,7 @@ include("header.php");
         if ($_REQUEST['session_id']) $session_id=$_REQUEST['session_id'];
                 else $session_id='';
 
-	if ($_REQUEST['remember']) { 
+	if ($_REQUEST['remember']) {
 		$_REQUEST=array_merge($_REQUEST,$_SESSION['save_posted']);
 		$_SESSION['save_posted']=array();
 		unset($_REQUEST['change']);
@@ -64,12 +64,12 @@ include("header.php");
 				$alr_reg=experiment__count_participate_at($experiment_id,$to_session);
 				$free_places=$tsession['part_needed']+$tsession['part_reserve']-$alr_reg;
 				if ($free_places < 0) $free_places=0;
-	
+
 				if ($num_to_add > $free_places) {
 					$continue=false;
 					message($lang['too_much_participants_to_register'].' '.
 						$lang['free_places_in_session_xxx'].' '.
-						session__build_name($tsession).': 
+						session__build_name($tsession).':
 						<FONT color="green">'.$free_places.'</FONT><BR>'.
 						$lang['please_change_your_selection'],'message_error');
 						$_SESSION['save_posted']=$_REQUEST;
@@ -120,7 +120,7 @@ include("header.php");
                                 if ($_REQUEST['rules'.$i]=="y") $p_rules[]=$_REQUEST['pid'.$i];
                                                         else $p_rules_not[]=$_REQUEST['pid'.$i];
 
-				if ($_REQUEST['session'.$i]!=$session_id 
+				if ($_REQUEST['session'.$i]!=$session_id
 				    && $_REQUEST['session'.$i] != $_REQUEST['csession'.$i]) {
 					$to_session=$_REQUEST['session'.$i];
 					if (!isset($move[$to_session])) $move[$to_session]=array();
@@ -135,7 +135,7 @@ include("header.php");
                                 WHERE experiment_id='".$experiment_id."'
 				AND participant_id IN ('".$part_list."')";
 			$done=mysql_query($query) or die("Database error: " . mysql_error());
-			
+
 			$part_list=implode("','",$p_shup_not);
                         $query="UPDATE ".table('participate_at')."
                                 SET shownup = 'n'
@@ -205,12 +205,12 @@ include("header.php");
 				if ($msession==0) $m_message.=$lang['xxx_subjects_removed_from_registration'];
 				   else {
 					$tsession=orsee_db_load_array("sessions",$msession,"session_id");
-					$m_message.=$lang['xxx_subjects_moved_to_session_xxx'].' 
+					$m_message.=$lang['xxx_subjects_moved_to_session_xxx'].'
 						<A HREF="'.thisdoc().'?focus=registered&experiment_id='.
 							$experiment_id.'&session_id='.$msession.'">'.
                 					session__build_name($tsession).'</A>';
 					$tpartnr=experiment__count_participate_at($experiment_id,$msession);
-					if ($tsession['part_needed'] + $tsession['part_reserve'] < $tpartnr) 
+					if ($tsession['part_needed'] + $tsession['part_reserve'] < $tpartnr)
 						$mmessage.='<BLINK>'.
 							$lang['subjects_number_exceeded'].'</BLINK>';
 					}
@@ -234,7 +234,7 @@ include("header.php");
 	script__part_reg_show();
 
 
-	if ($_REQUEST['sort']) $order=$_REQUEST['sort']; 
+	if ($_REQUEST['sort']) $order=$_REQUEST['sort'];
 		else $order="session_start_year, session_start_month, session_start_day,
                 	session_start_hour, session_start_minute, lname, fname, email";
 
@@ -258,16 +258,16 @@ include("header.php");
         	case "participated":	$where_clause="AND participated='y'";
                                         $title=$lang['subjects_participated'];
                                         break;
-		} 
+		}
 
 
-	$select_query=" SELECT * FROM ".table('participants').", ".table('participate_at').", 
+	$select_query=" SELECT * FROM ".table('participants').", ".table('participate_at').",
 					".table('sessions')."
 			WHERE ".table('participants').".participant_id=".
-					table('participate_at').".participant_id 
-			AND ".table('sessions').".session_id=".table('participate_at').".session_id 
+					table('participate_at').".participant_id
+			AND ".table('sessions').".session_id=".table('participate_at').".session_id
 			AND ".table('participate_at').".experiment_id='".$experiment_id."' ";
-	if ($session_id) $select_query.=" AND ".table('participate_at').".session_id='".$session_id."' "; 
+	if ($session_id) $select_query.=" AND ".table('participate_at').".session_id='".$session_id."' ";
         $select_query.=$where_clause." ORDER BY ".$order;
 
 
@@ -284,7 +284,7 @@ include("header.php");
 		</P>';
 
 	// show query
-	echo '	<P class="small">Query: '.$select_query.'</P>';
+	// echo '	<P class="small">Query: '.$select_query.'</P>';
 
 	// get result
 	$result=mysql_query($select_query) or die("Database error: " . mysql_error());
@@ -300,7 +300,7 @@ include("header.php");
 	// form
 	echo '
 		<FORM name="part_list" method=post action="'.thisdoc().'">
-	
+
 		<BR>
 		<table border=0>
 			<TR>
@@ -390,8 +390,8 @@ include("header.php");
 	   			<td class="small">';
 
                        	if ($registered || $shownup) {
-                       		echo '<INPUT type=checkbox name="shup'.$pnr.'" value="y" 
-					onclick="checkshup('.$pnr.')"'; 
+                       		echo '<INPUT type=checkbox name="shup'.$pnr.'" value="y"
+					onclick="checkshup('.$pnr.')"';
                                	if ($p['shownup']=="y") echo ' CHECKED';
 				if ($disabled) echo ' DISABLED';
 				echo '>';
@@ -400,8 +400,8 @@ include("header.php");
 
 	   		echo '</td>
 	   			<td class="small">
-        	               		<INPUT type=checkbox name="part'.$pnr.'" value="y" 
-						onclick="checkpart('.$pnr.')"'; 
+        	               		<INPUT type=checkbox name="part'.$pnr.'" value="y"
+						onclick="checkpart('.$pnr.')"';
         	                       	if ($p['participated']=="y") echo ' CHECKED';
 					if ($disabled) echo ' DISABLED';
                 	        	echo '>
@@ -414,7 +414,7 @@ include("header.php");
 					echo '>';
 			//		}
 			//	   else {
-			//		if ($p['rules_signed']=="y") echo $lang['yes']; 
+			//		if ($p['rules_signed']=="y") echo $lang['yes'];
 			//					else echo $lang['no_emp'];
 			//		}
 				echo '</td>';
@@ -449,11 +449,11 @@ function form__check_all($name,$count,$second_sel_name="",$second_un_name="") {
 			form__check_all('reg',$result_count);
 			echo '</TD>';
 			}
-	
+
 		if ($registered || $shownup || $participated) {
 			echo '<TD></TD>
 				<TD>';
-			if ($registered || $shownup) 
+			if ($registered || $shownup)
 				form__check_all('shup',$result_count,'','part');
 			echo '</TD>
 				<TD>';
@@ -483,7 +483,7 @@ function form__check_all($name,$count,$second_sel_name="",$second_un_name="") {
 				<TD>
 					'.$lang['check_for_free_places_in_session'].'
 					<INPUT type=checkbox name="check_if_full" value="true"';
-					if ($_REQUEST['check_if_full'] || ! $_REQUEST['remember']) 
+					if ($_REQUEST['check_if_full'] || ! $_REQUEST['remember'])
 						echo ' CHECKED';
 					echo '>
 				</TD>
@@ -502,7 +502,7 @@ function form__check_all($name,$count,$second_sel_name="",$second_un_name="") {
 		}
 
 	echo '</table>
-		
+
 		</form>
 
 		<BR>
@@ -535,7 +535,7 @@ function form__check_all($name,$count,$second_sel_name="",$second_un_name="") {
 						'<INPUT type=submit name="submit" value="'.$send_button_title.'"></FORM>';
                                         }
 	echo '		</TD><TD align=right>';
-			if (check_allow('participants_bulk_mail')) 
+			if (check_allow('participants_bulk_mail'))
                         	experimentmail__bulk_mail_form();
 	echo '		</TD>';
 
