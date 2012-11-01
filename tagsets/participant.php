@@ -118,7 +118,7 @@ function participant__form_fname() {
 function participant__check_exist($varname,$required) {
 global $errors__dataform;
         if ($required=="y") {
-                if (!(isset($_REQUEST[$varname]) && $_REQUEST[$varname]))
+                if (!(isset($_REQUEST[$varname]) && trim($_REQUEST[$varname])))
                 	$errors__dataform[]=$varname;
         }
 }
