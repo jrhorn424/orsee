@@ -80,6 +80,12 @@ include("header.php");
 					}
 				}
 
+            if ($deleted=='y') echo participants__count_unsubscribed_participants().
+                ' '.$lang['xxx_unsubscribed_participants_found'];
+                else echo participants__count_participants().'
+                    '.$lang['xxx_participants_registered'];
+            echo ''
+
 			if ($continue) {
 				$part_list=implode("','",$p_to_add);
                			$query="UPDATE ".table('participate_at')."

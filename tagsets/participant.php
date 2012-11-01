@@ -22,6 +22,16 @@ function participants__count_participants_temp($constraint="") {
         return $line['pcount'];
 }
 
+function participants__count_unsubscribed_participants($constraint="") {
+    if ($constraint) $where_clause=" AND ".$constraint;
+        else $where_clause="";
+        $query="SELECT COUNT(participant_id) as pcount
+            FROM ".table('participants')."
+            WHERE deleted='y' ".$where_clause;
+    $line=orsee_query($query);
+    return $line['pcount'];
+}
+
 // check if participant_id exists in participants table
 function participant__participant_id_exists($pid) {
                 $query="SELECT participant_id FROM ".table('participants')."
