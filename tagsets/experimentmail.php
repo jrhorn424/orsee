@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // experimentmail functions. part of orsee. see orsee.org
 //
@@ -32,7 +32,7 @@ function experimentmail__mail($recipient,$subject,$message,$headers,$env_sender=
 function load_mail($mail_name,$lang) {
 	global $authdata;
 
-	$query="SELECT * FROM ".table('lang')." 
+	$query="SELECT * FROM ".table('lang')."
 		WHERE content_type='mail'
 		AND content_name='".$mail_name."'";
 	$marr=orsee_query($query);
@@ -70,8 +70,8 @@ function experimentmail__load_bulk_mail($bulk_id,$tlang="") {
 
 function experimentmail__gc_bulk_mail_texts() {
 	$active_bulks=array();
-        $query="SELECT ".table('bulk_mail_texts').".bulk_id from ".table('bulk_mail_texts').", ".table('mail_queue')." 
-		WHERE ".table('bulk_mail_texts').".bulk_id=".table('mail_queue').".bulk_id 
+        $query="SELECT ".table('bulk_mail_texts').".bulk_id from ".table('bulk_mail_texts').", ".table('mail_queue')."
+		WHERE ".table('bulk_mail_texts').".bulk_id=".table('mail_queue').".bulk_id
                 ORDER BY ".table('bulk_mail_texts').".bulk_id";
         $result=mysql_query($query) or die("Database error: " . mysql_error());
 	while ($line=mysql_fetch_assoc($result)) {
@@ -98,7 +98,7 @@ function process_mail_template($template,$vararray) {
                 }
            }
 	$result="";
-        foreach($output as $outputline) 
+        foreach($output as $outputline)
               $result=$result.$outputline."\n";
         return $result;
 }
@@ -116,7 +116,7 @@ function experimentmail__mail_attach($to, $from, $subject, $message, $filename, 
    $header.= "MIME-Version: 1.0".$lb;
    $header.= "Content-Type: multipart/mixed;".$lb;
    $header.= " boundary=\"".$mime_boundary."\"".$lb;
-   
+
    $content = "This is a multi-part message in MIME format.".$lb.$lb;
    $content.= "--".$mime_boundary.$lb;
    $content.= "Content-Type: text/plain; charset=\"iso-8859-1\"".$lb;
@@ -136,7 +136,7 @@ function experimentmail__mail_attach($to, $from, $subject, $message, $filename, 
 
 
 // lists possible sessions for given experiment
-// only sessions, which registration end is in the future and which 
+// only sessions, which registration end is in the future and which
 // are not full are listed
 function experimentmail__get_session_list($experiment_id,$tlang="") {
 	global $settings, $lang;
@@ -144,13 +144,13 @@ function experimentmail__get_session_list($experiment_id,$tlang="") {
 
 	if (!$tlang) $tlang=$settings['public_standard_language'];
 
-	if ($thislang['lang']!=$tlang) 
+	if ($thislang['lang']!=$tlang)
 		$lang=load_language($tlang);
 
 	$query="SELECT *
       		FROM ".table('sessions')."
         	WHERE experiment_id='".$experiment_id."'
-		AND session_finished!='y' 
+		AND session_finished!='y'
       		ORDER BY session_start_year, session_start_month, session_start_day,
 		 	session_start_hour, session_start_minute";
 	$result=mysql_query($query) or die("Database error: " . mysql_error());
@@ -182,12 +182,12 @@ function experimentmail__send_invitations_to_queue($experiment_id,$whom="not-inv
 	mt_srand((double)microtime()*1000000);
         $now=mt_rand();
         $order="ORDER BY rand(".$now.") ";
-	$query="INSERT INTO ".table('mail_queue')." (timestamp,mail_type,mail_recipient,experiment_id) 
-		SELECT UNIX_TIMESTAMP(),'invitation', ".table('participants').".participant_id, experiment_id 
-		FROM ".table('participants').", ".table('participate_at')." 
-		WHERE experiment_id='".$experiment_id."' 
+	$query="INSERT INTO ".table('mail_queue')." (timestamp,mail_type,mail_recipient,experiment_id)
+		SELECT UNIX_TIMESTAMP(),'invitation', ".table('participants').".participant_id, experiment_id
+		FROM ".table('participants').", ".table('participate_at')."
+		WHERE experiment_id='".$experiment_id."'
 		AND ".table('participants').".participant_id=".table('participate_at').".participant_id ".
-		$aquery." 
+		$aquery."
 		AND registered = 'n' AND deleted='n'".$order;
 
 	$done=mysql_query($query) or die("Database error: " . mysql_error());
@@ -201,7 +201,7 @@ function experimentmail__send_bulk_mail_to_queue($bulk_id,$part_array) {
 	if (is_array($part_array)) {
 		$now=time();
 		foreach ($part_array as $participant_id) {
-        		$query="INSERT INTO ".table('mail_queue')." 
+        		$query="INSERT INTO ".table('mail_queue')."
 				SET timestamp='".$now."',
 				mail_type='bulk_mail',
 				mail_recipient='".$participant_id."',
@@ -303,7 +303,7 @@ function experimentmail__send_mails_from_queue($number=0,$type="",$experiment_id
 		$continue=true;
 
 		// well, if experiment_id, session_id, recipient, footer or inv_text, add to array
-		if (!isset($exps[$texp]) && $texp) 
+		if (!isset($exps[$texp]) && $texp)
 			$exps[$texp]=orsee_db_load_array("experiments",$texp,"experiment_id");
 		if (!isset($sesss[$tsess]) && $tsess)
                         $sesss[$tsess]=orsee_db_load_array("sessions",$tsess,"session_id");
@@ -333,8 +333,8 @@ function experimentmail__send_mails_from_queue($number=0,$type="",$experiment_id
 			$inv_texts[$texp][$tlang]=experimentmail__load_invitation_text($texp,$tlang);
 		if ($ttype=="invitation" && !isset($slists[$texp][$tlang]))
 			$slists[$texp][$tlang]=experimentmail__get_session_list($texp,$tlang);
-		if ($ttype=="bulk_mail" && !isset($bulk_mails[$tlang]))
-                        $bulk_mails[$tlang]=experimentmail__load_bulk_mail($tbulk,$tlang);
+        if ($ttype=="bulk_mail" && !isset($bulk_mails[$tbulk][$tlang]))
+                        $bulk_mails[$tbulk][$tlang]=experimentmail__load_bulk_mail($tbulk,$tlang);
 
 		// check for missing values ...
 		if (!isset($parts[$tpart]['participant_id'])) {
@@ -348,7 +348,7 @@ function experimentmail__send_mails_from_queue($number=0,$type="",$experiment_id
 			$parts[$tpart]['gender']=$genders[$tlang][$parts[$tpart]['gender']];
 			}
 
-                if (!isset($exps[$texp]['experiment_id']) && ($ttype=="invitation" || $ttype=="session_reminder" 
+                if (!isset($exps[$texp]['experiment_id']) && ($ttype=="invitation" || $ttype=="session_reminder"
 				|| $ttype=="noshow_warning")) {
                         $continue=false;
                         // email error: no experiment id given
@@ -367,7 +367,7 @@ function experimentmail__send_mails_from_queue($number=0,$type="",$experiment_id
 			$line['error'].="inv_text:";
                         }
 
-		if (!isset($bulk_mails[$tlang]) && $ttype=="bulk_mail") {
+        if (!isset($bulk_mails[$tbulk][$tlang]) && $ttype=="bulk_mail") {
                         $continue=false;
                         // email error: no bulk_mail given
                         $line['error'].="bulk_mail:";
@@ -377,7 +377,7 @@ function experimentmail__send_mails_from_queue($number=0,$type="",$experiment_id
 		if ($continue) {
 
 			switch ($line['mail_type']) {
-				case "invitation": 
+				case "invitation":
 					$invitations[]=$line;
 					break;
 				case "session_reminder":
@@ -386,7 +386,7 @@ function experimentmail__send_mails_from_queue($number=0,$type="",$experiment_id
 				case "noshow_warning":
                                         $warnings[]=$line;
                                         break;
-				case "bulk_mail": 
+				case "bulk_mail":
 					$bulks[]=$line;
 					break;
 				}
@@ -452,11 +452,11 @@ function experimentmail__send_mails_from_queue($number=0,$type="",$experiment_id
 			$errors[]=$mail;
 			}
 		}
-				
+
 	// bulks
 	foreach ($bulks as $mail) {
                 $tlang=$parts[$mail['mail_recipient']]['language'];
-                $done=experimentmail__send_bulk_mail($mail,$parts[$mail['mail_recipient']],$bulk_mails[$tlang],$footers[$tlang]);
+                $done=experimentmail__send_bulk_mail($mail,$parts[$mail['mail_recipient']],$bulk_mails[$mail['bulk_id']][$tlang],$footers[$tlang]);
                 if ($done) {
                         $mails_sent++;
                         $deleted=experimentmail__delete_from_queue($mail['mail_id']);
@@ -471,8 +471,8 @@ function experimentmail__send_mails_from_queue($number=0,$type="",$experiment_id
 
 	// handle errors
 	foreach ($errors as $mail) {
-		$query="UPDATE ".table('mail_queue')." 
-			SET error='".$mail['error']."' 
+		$query="UPDATE ".table('mail_queue')."
+			SET error='".$mail['error']."'
 			WHERE mail_id='".$mail['mail_id']."'";
 		$done=mysql_query($query) or die("Database error: " . mysql_error());
 
@@ -577,9 +577,9 @@ function experimentmail__send_reminder_notice($line,$number,$sent,$disclaimer=""
 		$mail['session_name']=session__build_name($line,$tlang);
 		$mail['experiment_name']=$line['experiment_name'];
 		$mail['nr_participants'] = ($sent) ? $number : 0;
-	
+
 		switch ($disclaimer) {
-			case 'part_needed': 
+			case 'part_needed':
 				$mail['disclaimer']=load_language_symbol('reminder_not_sent_part_needed',$tlang);
 				break;
 			case 'part_reserve':
@@ -660,7 +660,7 @@ function experimentmail__send_bulk_mail($mail,$part,$bulk_mail,$footer) {
 function experimentmail__update_invited_flag($mail) {
 
         $query="UPDATE ".table('participate_at')."
-		SET invited='y' 
+		SET invited='y'
                 WHERE participant_id='".$mail['mail_recipient']."'
 		AND experiment_id='".$mail['experiment_id']."'";
         $result=mysql_query($query) or die("Database error: " . mysql_error());
@@ -706,7 +706,7 @@ function experimentmail__get_language($partlang) {
 	global $authdata;
         if (isset($authdata['language']) && $authdata['language']) $maillang=$authdata['language'];
                         else $maillang=$partlang;
-	return $maillang;	
+	return $maillang;
 }
 
 function experimentmail__get_admin_language($adminlang) {
@@ -734,7 +734,7 @@ function experimentmail__get_mail_footer($participant_id) {
 
 function experimentmail__get_admin_footer($maillang='',$admin_id=0) {
 
-	if ($admin_id>0) 
+	if ($admin_id>0)
 		$admin=orsee_db_load_array("admin",$admin_id,"admin_id");
 		else $admin=array();
 
@@ -864,7 +864,7 @@ function experimentmail__send_calendar() {
 
         $now=time();
 
-	if (isset($settings['emailed_calendar_included_months']) && $settings['emailed_calendar_included_months']>0) 
+	if (isset($settings['emailed_calendar_included_months']) && $settings['emailed_calendar_included_months']>0)
 			$number_of_months=$settings['emailed_calendar_included_months']-1;
 	else $number_of_months=1;
 
