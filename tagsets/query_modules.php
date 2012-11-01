@@ -95,7 +95,7 @@ switch ($module) {
 		$bz=$_REQUEST['field_bezug'];
 		echo '	<TABLE width=90%>
 				<TR>
-					<TD> 
+					<TD>
 						'.$lang['where'].'
 	                         		<INPUT type=text size=10 maxlength=30 name=query_field
                                  			value="'.$_REQUEST['query_field'].'">
@@ -122,11 +122,11 @@ switch ($module) {
 				 		'.$lang['where_field_of_studies_is'].'
 				 		<select name="field_of_studies_not">
 				 			<OPTION value=""';
-                                        			if (!$_REQUEST['field_of_studies_not']) 
+                                        			if (!$_REQUEST['field_of_studies_not'])
 									echo ' SELECTED';
                                         			echo '></OPTION>
 				 			<OPTION value="!"';
-								if ($_REQUEST['field_of_studies_not']) 
+								if ($_REQUEST['field_of_studies_not'])
 									echo ' SELECTED';
 								echo '>'.$lang['not'].'</OPTION>
 				 		</select> ';
@@ -164,7 +164,7 @@ switch ($module) {
 					<TD>
 				 		'.$lang['where_gender_is'].'
         	                		<SELECT name="query_gender">
-						<OPTION value="m"'; if ($_REQUEST['query_gender']!="f") echo ' SELECTED'; 
+						<OPTION value="m"'; if ($_REQUEST['query_gender']!="f") echo ' SELECTED';
 							echo '>'.$lang['gender_m'].'</OPTION>
 	                        		<OPTION value="f"'; if ($_REQUEST['query_gender']=="f") echo ' SELECTED';
                                        			echo '>'.$lang['gender_f'].'</OPTION>
@@ -184,10 +184,10 @@ switch ($module) {
 					<TD>
 						'.$lang['where_nr_noshowups_is'].'
 				 		<select name="query_noshowups_sign">
-                                 			<OPTION value="<="'; 
+                                 			<OPTION value="<="';
 						if ($_REQUEST['query_noshowups_sign']!=">") echo ' SELECTED';
                                                         echo '><=</OPTION>
-                                 			<OPTION value=">""'; 
+                                 			<OPTION value=">""';
 						if ($_REQUEST['query_noshowups_sign']==">") echo ' SELECTED';
                                                         echo '>></OPTION>
                                  		</select> ';
@@ -245,12 +245,12 @@ switch ($module) {
                                                 <select name="query_study_start_sign">
                                                         <OPTION value="<="'; if ($_REQUEST['query_study_start_sign']=="<=") echo ' SELECTED';
                                                         		echo '><=</OPTION>
-							<OPTION value="="'; 
+							<OPTION value="="';
 							if ($_REQUEST['query_study_start_sign']=="=" || $_REQUEST['new']) echo ' SELECTED';
                                                                         echo '>=</OPTION>
                                                         <OPTION value=">"'; if ($_REQUEST['query_study_start_sign']==">") echo ' SELECTED';
                                                                         echo '>></OPTION>
-                                                </select> 
+                                                </select>
 
         	                		<SELECT name=query_study_start>';
                 		$query="SELECT DISTINCTROW begin_of_studies
@@ -276,11 +276,11 @@ switch ($module) {
                                                 '.$lang['who_are_in_subjectpool'].'
                                                 <select name="subjectpool_not">
                                                         <OPTION value=""';
-                                                                if (!$_REQUEST['subjectpool_not']) 
+                                                                if (!$_REQUEST['subjectpool_not'])
                                                                         echo ' SELECTED';
                                                                 echo '></OPTION>
                                                         <OPTION value="!"';
-                                                                if ($_REQUEST['subjectpool_not']) 
+                                                                if ($_REQUEST['subjectpool_not'])
                                                                         echo ' SELECTED';
                                                                 echo '>'.$lang['not'].'</OPTION>
                                                 </select> ';
@@ -323,9 +323,12 @@ switch ($module) {
                                 }
                         if ($wclause) $wclause.=" )";
 
-                        $query="SELECT DISTINCT participant_id 
-				FROM ".table('participate_at').", ".table('experiments')." 
-                                WHERE participated='y' ".$wclause." ORDER BY participant_id";
+                        $query="SELECT DISTINCT participant_id
+                            FROM ".table('participate_at').", ".table('experiments')."
+                            WHERE participated='y' AND
+                            ".table('participate_at').".experiment_id=".table('experiments').".experiment_id
+
+                            ".$wclause." ORDER BY participant_id";
                         $result=mysql_query($query) or die("Database error: " . mysql_error());
 
                         while ($line = mysql_fetch_assoc($result)) $participants[]=$line['participant_id'];
@@ -392,7 +395,7 @@ switch ($module) {
                         	WHERE participated='y' ".$wclause." ORDER BY participant_id";
                 	$result=mysql_query($query) or die("Database error: " . mysql_error());
                 	while ($line = mysql_fetch_assoc($result)) $part_exp[$line['experiment_id']][]=$line['participant_id'];
-		
+
 			if (count($exp_part)<2) {
 				$participants=$part_exp[$exp_part[0]];
 			 } else {
@@ -445,7 +448,7 @@ switch ($module) {
 
                 $where_clause=" ".table('participants').".participant_id ".$_REQUEST['inex'].
                                 " IN ('".$in_phrase."') ";
-                break; 
+                break;
 
 
 	case "field":
@@ -458,9 +461,9 @@ switch ($module) {
                    			$where_clause=table('participants').".".$_REQUEST['field_bezug']." like '%".$qval."%'";
 					break;
         			case "all":
-		   			$where_clause="(".table('participants').".fname like '%".$qval."%' OR 
+		   			$where_clause="(".table('participants').".fname like '%".$qval."%' OR
 							".table('participants').".lname like '%".$qval."%' OR
-							".table('participants').".email like '%".$qval."%')"; 
+							".table('participants').".email like '%".$qval."%')";
 					break;
 				}
 			}
@@ -478,9 +481,9 @@ switch ($module) {
                 break;
 
 	case "gender":
-		$where_clause=table('participants').".gender = '".$_REQUEST['query_gender']."'"; 
+		$where_clause=table('participants').".gender = '".$_REQUEST['query_gender']."'";
 		break;
-	
+
 	case "noshowups":
 		$where_clause=table('participants').".number_noshowup ".$_REQUEST['query_noshowups_sign'].
 					" '".$_REQUEST['query_noshowups']."'";
@@ -503,7 +506,7 @@ switch ($module) {
 		    	$where_clause=table('participants').".rand_string < '".$line['rand_string']."'";
 			}
 		*/
-		break;	
+		break;
 
 
 	case "study_start":
