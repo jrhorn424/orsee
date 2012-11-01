@@ -5,7 +5,7 @@ function load_language($language) {
 	$query="SELECT content_name, ".$language." as content_value FROM ".table('lang')." WHERE content_type='lang'";
 	$result=mysql_query($query);
 	while ($line = mysql_fetch_assoc($result)) {
-        	$lang[$line['content_name']]=htmlentities(stripslashes($line['content_value']));
+        	$lang[$line['content_name']]=stripslashes($line['content_value']);
             	}
 	mysql_free_result($result);
 	return $lang;
@@ -14,7 +14,7 @@ function load_language($language) {
 
 function load_language_symbol($symbol,$language) {
 
-	$query="SELECT content_name, ".$language." as content_value FROM ".table('lang')." 
+	$query="SELECT content_name, ".$language." as content_value FROM ".table('lang')."
 		WHERE content_type='lang' and content_name='".$symbol."'";
 	$line=orsee_query($query);
 	return stripslashes($line['content_value']);
@@ -75,7 +75,7 @@ function lang__select_lang($varname,$selected,$type="all") {
 function lang__insert_to_lang($item) {
 
 	$query="SELECT max(lang_id) as lcount
-		FROM ".table('lang')." 
+		FROM ".table('lang')."
 		WHERE content_type='".$item['content_type']."'";
 	$line=orsee_query($query);
 	$maxid=$line['lcount'];
@@ -110,7 +110,7 @@ function lang__insert_to_lang($item) {
 
 	$done1=orsee_db_save_array($item,"lang",$newid,"lang_id");
         if ($reorganize) $done2=lang__reorganize_lang_table($steps);
-			
+
 
 	return $newid;
 }
@@ -145,7 +145,7 @@ function lang__reorganize_lang_table($steps=10000) {
 			}
 		$query="UPDATE ".table('lang')." SET lang_id='".$i."' WHERE lang_id='".$item['lang_id']."'";
 		$result=mysql_query($query);
-		$i++;	
+		$i++;
                 }
 	mysql_free_result($result);
 
@@ -196,7 +196,7 @@ function lang__load_genders($language="") {
 
         if (!$language) $language=$lang['lang'];
 
-        $query="SELECT content_name, ".$language." as content_value FROM ".table('lang')." 
+        $query="SELECT content_name, ".$language." as content_value FROM ".table('lang')."
 		WHERE content_type='lang'
 		AND (content_name='gender_f' OR content_name='gender_m' OR content_name='gender_?')";
 
@@ -210,7 +210,7 @@ function lang__load_genders($language="") {
         return $genders;
 }
 
-/* this is a list of used, but not explicit programmed language items 
+/* this is a list of used, but not explicit programmed language items
 	just to not forget and delete them
 
 $lang['calendar']
