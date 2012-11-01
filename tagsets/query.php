@@ -25,13 +25,13 @@ function query__form($query_modules,$experiment="") {
 	foreach ($query_modules as $module) {
 		echo '	<TR bgcolor="'.$color['list_shade1'].'">
 				<TD valign=middle align=center>
-					'.($i+1).'. 
+					'.($i+1).'.
 					<INPUT type=checkbox name="use['.$i.']" value=true';
 					if ($lused[$i]) echo ' CHECKED';
 					echo '>
 				</TD>
 				<TD>';
-		if ($i != 0 && $module != "rand_subset") { 
+		if ($i != 0 && $module != "rand_subset") {
 			echo '		<SELECT name="con['.$i.']">
 					<OPTION value="AND"';
 						if ($lcons[$i] != "OR") echo ' SELECTED'; echo '>'.$lang['and'].'</OPTION>
@@ -66,13 +66,14 @@ function query__where_clause($query_modules,$use,$con) {
 			$current_where=query__where_clause_module($module);
 			if ($current_where) {
 				$query__where_clause.=" ";
-				if ($first_where) $query__where_clause.="AND"; else $query__where_clause.=$con[$i];
+				if ($first_where) $query__where_clause.="AND ("; else $query__where_clause.=$con[$i];
 				$query__where_clause.=" (".$current_where.") ";
 				$first_where=false;
 				}
 			}
 		$i=$i+1;
 	}
+    if($query__where_clause) $query__where_clause.=")";
 	return $query__where_clause;
 }
 
@@ -89,7 +90,7 @@ function query__join_assign($experiment,$query_modules,$use) {
 	$query__join_phrase.=	") WHERE ".table('participate_at').".participant_id IS NULL ";
 
 	$query__join_phrase.=" AND ".table('participants').".subscriptions LIKE '%".
-				$experiment['experiment_ext_type']."%'"; 
+				$experiment['experiment_ext_type']."%'";
 	$query__join_phrase.=" AND ".table('participants').".deleted='n'";
 	return $query__join_phrase;
 }
@@ -123,7 +124,7 @@ function query__current_other_experiments_checkbox_list($experiment_id="",$formn
                         FROM ".table('experiments').", ".table('participate_at')."
                         WHERE ".table('experiments').".experiment_id=".table('participate_at').".experiment_id
                         AND ".table('experiments').".experiment_id!='".$experiment_id."'
-			".$add_wc." 
+			".$add_wc."
                         GROUP BY experiment_id
                         ORDER BY experiment_id";
                 $result=mysql_query($query) or die("Database error: " . mysql_error());
@@ -214,15 +215,15 @@ function query__current_other_experiments_checkbox_list($experiment_id="",$formn
 			   else {
 				echo '???';
 				}
-			echo ') 
+			echo ')
                                 </TD>';
-			if ($ccol==$cols) { 
-				$ccol=1; 
+			if ($ccol==$cols) {
+				$ccol=1;
 				echo '</TR><TR bgcolor="';
 				if ($shade==true) echo $color['list_shade1']; else echo $color['list_shade2'];
-				echo '">'; 
+				echo '">';
 				if ($shade==true) $shade=false; else $shade=true;
-				} else $ccol=$ccol+1; 
+				} else $ccol=$ccol+1;
                         $i=$i+1;
                         }
 		if ($ccol>1) {
@@ -250,7 +251,7 @@ function query__experiment_classes_checkbox_list($experiment_id="") {
                         FROM ".table('experiments').", ".table('lang')."
                         WHERE ".table('experiments').".experiment_class=".table('lang').".content_name
                         AND ".table('experiments').".experiment_id!='".$experiment_id."'
-			GROUP BY content_name 
+			GROUP BY content_name
                         ORDER BY ".$lang['lang'];
                 $result=mysql_query($query) or die("Database error: " . mysql_error());
                 while ($line=mysql_fetch_assoc($result)) {
@@ -311,7 +312,7 @@ function query_show_result($select_query,$sort="lname,fname",$type="edit") {
         $professions=lang__load_professions();
 
 	echo '  <P class="small">'.$lang['query'].': '.$select_query.'</P>';
-	
+
 	$result=mysql_query($select_query) or die("Database error: " . mysql_error());
 
         $shade=false; $participants=array();
@@ -326,9 +327,9 @@ function query_show_result($select_query,$sort="lname,fname",$type="edit") {
 	$count_results=count($participants);
 
 
-        echo ' 
+        echo '
                         <A HREF="'.thisdoc();
-			if ($_REQUEST['experiment_id']) 
+			if ($_REQUEST['experiment_id'])
 				echo "?experiment_id=".$_REQUEST['experiment_id'];
 			echo '">'.$lang['new_query'].'</A>
                 <BR><BR>
@@ -363,7 +364,7 @@ function query_show_result($select_query,$sort="lname,fname",$type="edit") {
                 	if ($shade) echo ' bgcolor="'.$color['list_shade1'].'"';
                                else echo 'bgcolor="'.$color['list_shade2'].'"';
                 echo '>';
-		if ($assign || $drop) echo '<td><INPUT type=checkbox name="p'.$i.'" 
+		if ($assign || $drop) echo '<td><INPUT type=checkbox name="p'.$i.'"
 						value="'.$p['participant_id'].'"></td>';
                 echo '	<td class="small">'.$p['participant_id'].'</TD>
                         <td class="small"><A class="small" HREF="mailto:'.
