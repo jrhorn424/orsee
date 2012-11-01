@@ -4,7 +4,7 @@ ob_start();
 $title="delete faq";
 include ("header.php");
 
-	if (isset($_REQUEST['faq_id'])) $id=$_REQUEST['faq_id']; else $faq_id="";
+        if (isset($_REQUEST['faq_id'])) $faq_id=$_REQUEST['faq_id']; else $faq_id="";
 
         if (isset($_REQUEST['betternot']) && $_REQUEST['betternot'])
                 redirect ('admin/faq_edit.php?faq_id='.$faq_id);

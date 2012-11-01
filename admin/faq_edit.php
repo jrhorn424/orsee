@@ -1,7 +1,7 @@
 <?php
 ob_start();
 
-if (isset($_REQUEST['faq_id'])) $id=$_REQUEST['faq_id']; else $faq_id="";
+if (isset($_REQUEST['faq_id'])) $faq_id=$_REQUEST['faq_id']; else $faq_id="";
 
 $title="edit faq";
 include ("header.php");
@@ -18,7 +18,7 @@ include ("header.php");
 	if ($faq_id) {
 		$question=faq__load_question($faq_id);
 		$answer=faq__load_answer($faq_id);
-		}	
+		}
 
         // load languages
         $languages=get_languages();
@@ -29,7 +29,7 @@ include ("header.php");
 
 		$rquestion=$_REQUEST['question'];
 		$ranswer=$_REQUEST['answer'];
- 
+
                 foreach ($languages as $language) {
                         if (!$rquestion[$language]) {
                                 message ($lang['missing_question_in_language'].": ".$language);
@@ -49,7 +49,7 @@ include ("header.php");
                 if ($continue) {
                         if (!$faq_id) {
 				$new_faq_id=time();
-			
+
 				$faq['faq_id']=$new_faq_id;
 				$faq['evaluation']=0;
 				$done=orsee_db_save_array($faq,"faqs",$faq['faq_id'],"faq_id");
@@ -95,7 +95,7 @@ include ("header.php");
 	$shade=true;
 	foreach ($languages as $language) {
 		echo '	<tr';
-                        if ($shade) echo ' bgcolor="'.$color['list_shade1'].'"'; 
+                        if ($shade) echo ' bgcolor="'.$color['list_shade1'].'"';
 					else echo ' bgcolor="'.$color['list_shade2'].'"';
                         echo '>
 				<TD>
@@ -105,7 +105,7 @@ include ("header.php");
 				</TD>
 			</TR>
 			<tr';
-                        if ($shade) echo ' bgcolor="'.$color['list_shade1'].'"'; 
+                        if ($shade) echo ' bgcolor="'.$color['list_shade1'].'"';
 				else echo ' bgcolor="'.$color['list_shade2'].'"';
                         echo '>
 				<TD>
@@ -117,7 +117,7 @@ include ("header.php");
 				</TD>
 			</TR>
 			<tr';
-                        if ($shade) echo ' bgcolor="'.$color['list_shade1'].'"'; 
+                        if ($shade) echo ' bgcolor="'.$color['list_shade1'].'"';
 				else echo ' bgcolor="'.$color['list_shade2'].'"';
                         echo '>
 				<TD>
@@ -132,7 +132,7 @@ include ("header.php");
 		}
 
         echo '  </TABLE>
-                <TABLE> 
+                <TABLE>
                         <TR>
                                 <TD COLSPAN=2 align=center>
                                         <INPUT name=edit type=submit value="';
@@ -144,7 +144,7 @@ include ("header.php");
                 </FORM>
                 <BR>';
 
-        if ($id && check_allow('faq_delete')) {
+        if ($faq_id && check_allow('faq_delete')) {
                 echo '<BR><BR><FORM action="faq_delete.php">
                         <INPUT type=hidden name="faq_id" value="'.$faq_id.'">
                         <INPUT type=submit name="submit" value="'.$lang['delete'].'">
