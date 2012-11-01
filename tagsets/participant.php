@@ -152,7 +152,7 @@ function participant__check_email($required) {
 	participant__check_exist("email",$required);
 	global $errors__dataform, $lang;
 	if ($_REQUEST['email']) {
-		$isok=preg_match("/^[^@ \t\r\n]+@[-_0-9a-zA-Z]+\\.[^@ \t\r\n]+$/i",$_REQUEST['email']);
+		$isok=eregi("^[a-z0-9]+([_.-][a-z0-9]+)*@([a-z0-9]+([.-][a-z0-9]+)*)+\\.[a-z]{2,4}$",$_REQUEST['email']);
 		if (!$isok) {
 			$errors__dataform[]="email";
 			message($lang['email_address_not_ok']);
