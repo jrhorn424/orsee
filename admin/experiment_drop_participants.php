@@ -48,8 +48,8 @@ include ("header.php");
                 	$instring=implode("','",$selected_ids);
 			}
 
-		$query="DELETE FROM ".table('participate_at')."  
-                        WHERE experiment_id='".$experiment_id."' 
+		$query="DELETE FROM ".table('participate_at')."
+                        WHERE experiment_id='".$experiment_id."'
                         AND shownup='n' AND registered = 'n' AND participated='n'
 			AND participant_id IN ('".$instring."') ";
 		$done=mysql_query($query) or die("Database error: " . mysql_error());
@@ -74,10 +74,10 @@ include ("header.php");
 			if (!$where_clause) $where_clause=query__where_clause_module("all");
 
 			$select_query="SELECT ".table('participants').".*,
-				".table('participate_at').".invited  
-                        	FROM ".table('participants').", ".table('participate_at')." 
-				WHERE ".table('participate_at').".experiment_id=".$experiment_id." 
-				AND shownup = 'n' 
+				".table('participate_at').".invited
+                        	FROM ".table('participants').", ".table('participate_at')."
+				WHERE ".table('participate_at').".experiment_id=".$experiment_id."
+				AND shownup = 'n'
 				AND registered = 'n' AND participated='n'
                         	AND ".table('participate_at').".participant_id=".
 					table('participants').".participant_id ".
@@ -116,11 +116,11 @@ include ("header.php");
                 	<TR>
 				<TD></TD>
 				<TD align=center>
-                		<INPUT type=submit name="dropselected" 
+                		<INPUT type=submit name="dropselected"
 					value="'.$lang['remove_only_marked_participants'].'">
                 		</TD>
                 		<TD align=center>
-                		<INPUT type=submit name="dropall" 
+                		<INPUT type=submit name="dropall"
 					value="'.$lang['remove_all_participants_in_list'].'">
                 		</TD>
 			</TR>
@@ -132,7 +132,8 @@ include ("header.php");
 
 	else 	{
 
-		if ($_REQUEST['new']) $_SESSION['assign_request']=array();
+		if (!isset($_SESSION['assign_request']))
+        $_SESSION['assign_request']=array();
 			else {
 				$new_req=array_merge($_SESSION['assign_request'],$_REQUEST);
 				$_REQUEST=$new_req;
@@ -149,7 +150,7 @@ include ("header.php");
         		$lang['participants_assigned_to_this_experiment'];
 		echo '
 			<BR><BR>
-	
+
         		<FORM action="'.thisdoc().'" method="POST">
 			<INPUT type=hidden name="new_query" value="true">
 			<INPUT type=hidden name="experiment_id" value="'.$experiment_id.'">';

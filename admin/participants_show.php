@@ -30,8 +30,8 @@ include ("header.php");
 
 			if (!$where_clause) $where_clause=query__where_clause_module("all");
 
-			$select_query="SELECT ".table('participants').".* 
-                        	FROM ".table('participants')."  
+			$select_query="SELECT ".table('participants').".*
+                        	FROM ".table('participants')."
 				WHERE deleted='".$deleted."' ".
                         	$where_clause;
 
@@ -59,7 +59,8 @@ include ("header.php");
 
 	else 	{
 
-		if ($_REQUEST['new']) $_SESSION['assign_request']=array();
+		if (!isset($_SESSION['assign_request']))
+		$_SESSION['assign_request']=array();
 			else {
 				$new_req=array_merge($_SESSION['assign_request'],$_REQUEST);
 				$_REQUEST=$new_req;
@@ -70,7 +71,7 @@ include ("header.php");
 		echo participants__count_participants("deleted = 'n'");
 		echo ' '.$lang['xxx_participants_registered'].'
 			<BR><BR>
-	
+
         		<FORM action="'.thisdoc().'" method="POST">
 			<INPUT type=hidden name="new_query" value="true">';
 			if ($deleted=='y') echo '<INPUT type=hidden name="deleted" value="y">';

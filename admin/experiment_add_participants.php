@@ -49,9 +49,9 @@ include ("header.php");
                 	$instring=implode("','",$selected_ids);
 			}
 
-		$query="INSERT INTO ".table('participate_at')." (participant_id,experiment_id) 
-                        SELECT participant_id, '".$experiment_id."' 
-                        FROM ".table('participants')." 
+		$query="INSERT INTO ".table('participate_at')." (participant_id,experiment_id)
+                        SELECT participant_id, '".$experiment_id."'
+                        FROM ".table('participants')."
 			WHERE participant_id IN ('".$instring."') ";
 		$done=mysql_query($query) or die("Database error: " . mysql_error());
 
@@ -81,7 +81,7 @@ include ("header.php");
 
 			$orderlimit=query__orderlimit($query_modules,$_REQUEST['use']);
 
-			$select_query="SELECT ".table('participants').".* 
+			$select_query="SELECT ".table('participants').".*
                         	FROM ".table('participants')." ".
 				$join_phrase." ".
                         	$where_clause." ".
@@ -120,11 +120,11 @@ include ("header.php");
                 	<TR>
 				<TD></TD>
 				<TD align=center>
-                		<INPUT type=submit name="addselected" 
+                		<INPUT type=submit name="addselected"
 					value="'.$lang['assign_only_marked_participants'].'">
                 		</TD>
                 		<TD align=center>
-                		<INPUT type=submit name="addall" 
+                		<INPUT type=submit name="addall"
 					value="'.$lang['assign_all_participants_in_list'].'">
                 		</TD>
 			</TR>
@@ -136,7 +136,8 @@ include ("header.php");
 
 	else 	{
 
-		if ($_REQUEST['new']) $_SESSION['assign_request']=array();
+		if (!isset($_SESSION['assign_request']))
+        $_SESSION['assign_request']=array();
 			else {
 				$new_req=array_merge($_SESSION['assign_request'],$_REQUEST);
 				$_REQUEST=$new_req;
@@ -153,7 +154,7 @@ include ("header.php");
         		$lang['participants_assigned_to_this_experiment'];
 		echo '
 			<BR><BR>
-	
+
         		<FORM action="'.thisdoc().'" method="POST">
 			<INPUT type=hidden name="new_query" value="true">
 			<INPUT type=hidden name="experiment_id" value="'.$experiment_id.'">';
