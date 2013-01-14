@@ -1,9 +1,23 @@
 # ICES Recruiter - ORSEE Implementation
 
+## Server Setup
+Familiarize yourself with the [Linode Documentation](http://library.linode.com/). The [Beginner's Guide](http://library.linode.com/beginners-guide) is a good place to start, but if you're already familiar with website administration, look at the [Getting Started Guide](http://library.linode.com/getting-started). If you're unfamiliar with administering a linux server, check out [Linux System Administration Basics](http://library.linode.com/using-linux/administration-basics). To turn the server into a webserver, have a look at the [LAMP Server](http://library.linode.com/lamp-guides/ubuntu-12.04-precise-pangolin) guide. This server was secured following the [Securing Your Server](http://library.linode.com/securing-your-server) guide.
+
+If the server needs to be upgraded due to performance or disk space issues, it can be resized from the [Linode Manager](https://manager.linode.com/). Alternatively, RAM, storage, IP addresses, and bandwidth can be purchased from the `Extras` tab in the Linode.
+
+Currently, the server utilizes password-less SSH login, restricted to the user `jrhorn424`. This will need to be changed when another sysadmin takesover. To perform the transfer:
+1. Create the new user, add to admin group.
+2. Add the allowed user to `/etc/ssh/sshd_config`.
+3. Have the new user create an SSH key from their development machine. See the [OpenSSH Tutorial](http://www.linode.com/wiki/index.php/OpenSSH_Tutorial).
+4. Add the `.pub` key to the `~/.ssh/authorized_keys` file.
+
+Live volunteers can always be found on in the [Linode Channel on IRC](irc://#linode@irc.oftc.net). 
+
 ## Notes
 - Server: 66.175.213.80, [recruiter.ices-experiments.org](http://recruiter.ices-experiments.org)
 [Linode VPS](http://www.linode.com), Linode 512 @ $19.95/mo.
+- Operating System: [Ubuntu 12.04 LTS Precise Pangolin](https://help.ubuntu.com/12.04/serverguide/index.html)
 - Domain: [ices-experiments.org](http://ices.experiments.org)
 [Name.com](http://www.name.com), 10 year registration @ $9.90/yr. , plus 10 year whois privacy @ $3.99/yr.
+- DNS: Managed by [Name.com](https://www.name.com/domain/dns/ices-experiments.org)
 - Software: [ORSEE](http://www.orsee.org)
-- 
