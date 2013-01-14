@@ -1,0 +1,9 @@
+# ICES Recruiter - ORSEE Implementation
+
+## Notes
+- Server: 66.175.213.80, [recruiter.ices-experiments.org](http://recruiter.ices-experiments.org)
+[Linode VPS](http://www.linode.com), Linode 512 @ $19.95/mo.
+- Domain: [ices-experiments.org](http://ices.experiments.org)
+[Name.com](http://www.name.com), 10 year registration @ $9.90/yr. , plus 10 year whois privacy @ $3.99/yr.
+- Software: [ORSEE](http://www.orsee.org)
+- 
