@@ -48,7 +48,7 @@ function participant__create_participant_id() {
 	   srand ((double)microtime()*1000000);
            while ($gibtsschon) {
            	$crypt_id = "/";
-           	while (preg_match("/(/|\\.)/i",$crypt_id)) { //<or <match <get-var crypt_id> "/"> <match <get-var crypt_id> "\\.">>>
+           	while (preg_match("#(/|\\.)#i",$crypt_id)) { //<or <match <get-var crypt_id> "/"> <match <get-var crypt_id> "\\.">>>
            		$participant_id = rand();
            		$crypt_id=unix_crypt($participant_id);
            		}
