@@ -13,7 +13,7 @@ include ("../style/".$settings['style']."/help_html_header.php");
 
 	if (isset($_REQUEST['eval']) && !($v_already)) {
 
-		$query="UPDATE ".table('faqs')." SET evaluation=evaluation+1 WHERE faq_id="".mysql_real_escape_string($_REQUEST['id']).";
+		$query="UPDATE ".table('faqs')." SET evaluation=evaluation+1 WHERE faq_id=".mysql_real_escape_string($_REQUEST['id']);
 		$done=mysql_query($query) or die("Database error: " . mysql_error());
 		$vote[$_REQUEST['id']]=true;
 		session_register(vote);
