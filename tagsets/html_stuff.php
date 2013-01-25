@@ -40,6 +40,7 @@ echo '<HTML>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 <meta http-equiv="expires" content="0">
 <TITLE>'.$pagetitle.'</TITLE>
+<link rel="stylesheet" type="text/css" href="../style/reset.css">
 <link rel="stylesheet" type="text/css" href="../style/'.$settings['style'].'/'.$stylesheet.'">
 
 <script type="text/javascript" src="//use.typekit.net/ive4nlq.js"></script>
