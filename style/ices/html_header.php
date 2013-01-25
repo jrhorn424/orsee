@@ -1,10 +1,8 @@
-<basefont face="Tahoma,Arial,Helvetica,sans-serif">
-
 <center>
 <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%">
 	<TR VALIGN=TOP ALIGN=LEFT BGCOLOR="#BC8F8F">
 		<TD COLSPAN=2 WIDTH=100% HEIGHT=19 ALIGN=RIGHT VALIGN=BOTTOM>
-		<P><FONT face="Arial" size=1 class="small" COLOR="#FFFFFF">ONLINE RECRUITMENT SYSTEM FOR ECONOMIC EXPERIMENTS</FONT>
+		<P>ONLINE RECRUITMENT SYSTEM FOR ECONOMIC EXPERIMENTS</P>
 		</TD>
 	</TR>
 
@@ -14,7 +12,7 @@
 			<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH=300>
 			<TR>
 				<TD VALIGN=TOP>
-				<FONT style="font-size:30pt;color: white">&nbsp;&nbsp;&nbsp;| &#248;</FONT>
+				&nbsp;&nbsp;&nbsp;| &#248;
 				</TD>
 			</TR>
 			</TABLE>
@@ -25,7 +23,7 @@
 
                         <TR>
                                 <TD valign=bottom align=right>
-                                <FONT style="font-size:30pt;color: white;font-weight: bold">ORSEE&nbsp;&nbsp;&nbsp;</FONT>
+                                ORSEE&nbsp;&nbsp;&nbsp;
                                 </TD>
                         </TR>
                         </TABLE>
@@ -35,7 +33,7 @@
 
 	<TR bgcolor="#2F4F4F">
                 <TD valign=top align=right>
-                        <FONT face="Arial" size=1 class="small" COLOR="#FFFFFF">THE EASE OF RECRUITMENT</FONT>
+                  THE EASE OF RECRUITMENT
                 </TD>
 
 	</TR>
