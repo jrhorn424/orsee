@@ -40,8 +40,11 @@ echo '<HTML>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 <meta http-equiv="expires" content="0">
 <TITLE>'.$pagetitle.'</TITLE>
-<link rel="stylesheet" type="text/css" href="../style/reset.css">
+<link rel="stylesheet" type="text/css" href="../style/normalize.css">
+<link rel="stylesheet" type="text/css" href="../style/main.css">
 <link rel="stylesheet" type="text/css" href="../style/'.$settings['style'].'/'.$stylesheet.'">
+
+<script src="../js/vendor/modernizr-2.6.2.min.js"></script>
 
 <script type="text/javascript" src="//use.typekit.net/ive4nlq.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
