@@ -3,7 +3,16 @@
 <!--
 
 /* Globals */
-body, table, thead, tbody, tr, td, th {
+body {
+  font-family: "pragmatica-web", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  margin: 0px 0px 2px 0px;
+  font-size: 10pt;
+  color: black;
+}
+
+table, thead, tbody, tr, td, th {
   font-family: "pragmatica-web", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -18,12 +27,6 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 /* Content */
-body {
-  margin: 0px 0px 2px 0px;
-  font-size: 10pt;
-  color: black;
-}
-
 .small {
   font-size: 8pt;
 }
