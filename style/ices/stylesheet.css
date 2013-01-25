@@ -2,63 +2,59 @@
 
 <!--
 
-body {
-	margin-top: 0px;
-	margin-left: 0px;
-	margin-right: 0px;
-	margin-bottom: 2px;
-        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-        font-size: 10pt;
-	font-weight: bold;
-        color: black;
-      }
-
-td    { font-family: Arial, Helvetica, sans-serif;
-	font-weight: bold;
-	text-decoration: none;
-	font-size: 10pt;
-	}
+/* Globals */
+body, table, thead, tbody, tr, td, th {
+  font-family: "pragmatica-web", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
 
 h1,h2,h3,h4,h5,h6 {
-	font-family: Arial, helvetica, sans-serif;
-        font-size: 14pt;
-        text-decoration: none;
-        font-weight: bold;
-	}
+  font-family: "museo-slab", serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14pt;
+  text-decoration: none;
+}
 
-.small    { font-family: Arial;
-	    font-size: 8pt; }
+/* Content */
+body {
+  margin: 0px 0px 2px 0px;
+  font-size: 10pt;
+  color: black;
+}
 
-.signature { font-family: Arial;
-		font-size: 8pt;
-		text-decoration: none;
-            }
+.small {
+  font-size: 8pt;
+}
 
-a, A     { font-family: Arial, Helvetica, sans-serif;
-        font-weight: bold;
-	font-size: 10pt;
-      }
+.signature {
+    font-size: 8pt;
+    text-decoration: none;
+}
 
-
-.title1     { font-family: Arial, helvetica, sans-serif;
-		font-size: 14pt;
-        	text-decoration: none;
-		font-weight: bold;
-	  }
+a, {
+  font-weight: bold;
+  font-size: 10pt;
+}
 
 
+.title1 {
+  font-size: 14pt;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Navigation */
 .menu_title {
-	font-family: Helvetica, Arial, sans-serif;
-	color: white;
-	font-weight: bold;
-	font-size: 9pt;
-	}
+  color: white;
+  font-weight: bold;
+  font-size: 9pt;
+}
 
 .menu_item {
-	font-family: Helvetica, Arial, sans-serif;
-	color: lightgrey;
-	font-weight: bold;
-	font-size: 9pt;
-	}
+  font-weight: bold;
+  font-size: 9pt;
+}
 
 //-->
