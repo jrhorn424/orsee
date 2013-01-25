@@ -42,6 +42,9 @@ echo '<HTML>
 <TITLE>'.$pagetitle.'</TITLE>
 <link rel="stylesheet" type="text/css" href="../style/'.$settings['style'].'/'.$stylesheet.'">
 
+<script type="text/javascript" src="//use.typekit.net/ive4nlq.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
 ';
 
 script__open_help();
