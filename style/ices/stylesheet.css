@@ -27,6 +27,22 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 
+/* Tables */
+table {
+  border-collapse: collapse;
+}
+
+th
+{
+  padding: 10px 8px;
+}
+
+td
+{
+  padding: 6px 8px;
+}
+
+
 /* Content */
 .small {
   font-size: 90%;
