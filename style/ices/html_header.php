@@ -2,7 +2,7 @@
 <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%">
 	<TR VALIGN=TOP ALIGN=LEFT BGCOLOR="#BC8F8F">
 		<TD COLSPAN=2 WIDTH=100% HEIGHT=19 ALIGN=RIGHT VALIGN=BOTTOM>
-		<P>ONLINE RECRUITMENT SYSTEM FOR ECONOMIC EXPERIMENTS</P>
+		<P>ICES Recruiter</P>
 		</TD>
 	</TR>
 
@@ -23,7 +23,7 @@
 
                         <TR>
                                 <TD valign=bottom align=right>
-                                ORSEE&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;
                                 </TD>
                         </TR>
                         </TABLE>
@@ -33,14 +33,14 @@
 
 	<TR bgcolor="#2F4F4F">
                 <TD valign=top align=right>
-                  THE EASE OF RECRUITMENT
+                  
                 </TD>
 
 	</TR>
 
 	<TR bgcolor="#BC8F8F" valign=top align=center>
 		<TD valign=top align=left colspan=2>
-		<?php navigation("horizontal"); ?>
+		<?php navigation("horizontal",false); ?>
 		</TD>
 	</TR>
 
