@@ -23,6 +23,7 @@ headlink|faqs|faqs|/public/faq.php|||true
 //headlink|internet_exp|internet_experiments|/public/ie.php|||true||true
 
 head|||
-link|impressum|impressum|/public/impressum.php|||true
+link|Directions||/public/directions.php|||true
 link|contact|contact|/public/contact.php|||true
 
+headlink||login|/admin/admin_login.php
