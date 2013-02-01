@@ -5,25 +5,25 @@
 // entrytype|menu__area|lang_item|url|icon|target|addp?|showonlyifp?|hideifp?
 
 
-headlink|mainpage|mainpage|/public/index.php|||true
+link|mainpage|mainpage|/public/index.php|||true
 
 link|public_register|register|/public/participant_create.php|||||true
 
 link|my_data|my_data|/public/participant_edit.php|||true|true
 link|my_registrations|my_registrations|/public/participant_show.php|||true|true
 
-headlink|calendar|calendar|/public/show_calendar.php|||true
+link|calendar|calendar|/public/show_calendar.php|||true
 
-headlink|rules|rules|/public/rules.php|||true
+link|rules|rules|/public/rules.php|||true
 
-headlink|privacy|privacy_policy|/public/privacy.php|||true
+link|privacy|privacy_policy|/public/privacy.php|||true
 
-headlink|faqs|faqs|/public/faq.php|||true
+link|faqs|faqs|/public/faq.php|||true
 
 //headlink|internet_exp|internet_experiments|/public/ie.php|||true||true
 
 head|||
-link|Directions||/public/directions.php|||true
+link||impressum|/public/directions.php
 link|contact|contact|/public/contact.php|||true
 
-headlink||login|/admin/admin_login.php
+link||login|/admin/admin_login.php
