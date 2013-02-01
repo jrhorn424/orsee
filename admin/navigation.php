@@ -1,7 +1,7 @@
 // navigation.php. part of orsee. see orsee.org.
 
 head|admindata|current_user_data_box|
-        
+
 headlink|mainpage|mainpage|/admin/|home
 
 head|experiments|experiments||experiments
@@ -13,7 +13,7 @@ link|experiments_my|my_experiments|/admin/experiment_my.php
 link|experiments_new|create_new|/admin/experiment_edit.php?addit=true
 
 link|experiments_old|finished_experiments|/admin/experiment_old.php
- 
+
 head|participants|participants||participants
 
 link|participants_main|overview|/admin/participants_main.php
@@ -30,4 +30,5 @@ headlink|statistics|statistics|/admin/statistics_main.php|statistics
 
 headlink|logout|logout|/admin/admin_logout.php|logout
 
+headlink||documentation|/docs/index.php
 
