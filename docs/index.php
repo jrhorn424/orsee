@@ -1,7 +1,8 @@
 <?php
 ob_start();
+$title="ORSEE Documentation";
 $menu__area="docs";
-include ("../public/header.php");
+include ("../admin/header.php");
 
 echo '<BR><BR>
   <center>
@@ -13,6 +14,6 @@ echo '<BR><BR>
 
     </center>';
 
-include ("../public/footer.php");
+include ("../admin/footer.php");
 
 ?>

@@ -30,5 +30,5 @@ headlink|statistics|statistics|/admin/statistics_main.php|statistics
 
 headlink|logout|logout|/admin/admin_logout.php|logout
 
-headlink||documentation|/docs/index.php
+headlink|docs|documentation|/docs/index.php
 
