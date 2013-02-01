@@ -281,8 +281,11 @@ function participant__form_begin_of_studies() {
     </TD></TR>';
 }
 
-function participant__form_() {
-
+function participant__form_age() {
+  global $lang;
+  tpr("age");
+  echo '<TD>'.$lang['age'].':</TD><TD><INPUT name=age type=text size=5 maxlength=3 value="'.$_REQUEST['age'].'"></TD>
+       </TR>';
 }
 
 function participant__check_work($required) {
@@ -465,6 +468,8 @@ function participant__form($form_title="",$button_title="",$form_type="") {
   participant__form_phone_number();
 
   participant__form_gender();
+
+  participant__form_age();
 
   if (!$admin) {
 
