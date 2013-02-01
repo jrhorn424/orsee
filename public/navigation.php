@@ -12,7 +12,7 @@ link|public_register|register|/public/participant_create.php|||||true
 link|my_data|my_data|/public/participant_edit.php|||true|true
 link|my_registrations|my_registrations|/public/participant_show.php|||true|true
 
-link|calendar|calendar|/public/show_calendar.php|||true
+//link|calendar|calendar|/public/show_calendar.php|||true
 
 link|rules|rules|/public/rules.php|||true
 
