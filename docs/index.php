@@ -1,7 +1,7 @@
 <?php
 ob_start();
 $menu__area="docs";
-include ("header.php");
+include ("../public/header.php");
 
 echo '<BR><BR>
   <center>
@@ -13,6 +13,6 @@ echo '<BR><BR>
 
     </center>';
 
-include ("footer.php");
+include ("../public/footer.php");
 
 ?>
