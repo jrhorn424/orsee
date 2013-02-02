@@ -39,8 +39,8 @@ session_public_free_places:	green
 
 
 # menu colors
-menu_title:	#000000
-menu_item:	#cdc9c9
+menu_title:	#cdc9c9
+menu_item:	#333333
 menu_item_highlighted_background:	#FFFFFF
 
 
