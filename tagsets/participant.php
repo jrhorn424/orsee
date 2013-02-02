@@ -310,6 +310,13 @@ function participant__form_total_years_in_college() {
        </TR>';
 }
 
+function participant__form_gpa() {
+  global $lang;
+  tpr("gpa");
+  echo '<TD>'.$lang['gpa'].':</TD><TD><INPUT name=gpa type=text size=5 maxlength=3 value="'.$_REQUEST['gpa'].'"></TD>
+       </TR>';
+}
+
 function participant__check_work($required) {
   global $subpool, $errors__dataform, $lang;
   if ($required=="y") {
@@ -498,6 +505,8 @@ function participant__form($form_title="",$button_title="",$form_type="") {
   participant__form_year_in_major();
 
   participant__form_total_years_in_college();
+
+  participant__form_gpa();
 
   if (!$admin) {
 
