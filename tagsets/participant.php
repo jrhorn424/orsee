@@ -299,7 +299,14 @@ function participant__form_ethnicity() {
 function participant__form_year_in_major() {
   global $lang;
   tpr("year_in_major");
-  echo '<TD>'.$lang['year_in_major'].':</TD><TD><INPUT name=year_in_major type=text size=5 maxlength=3 value="'.$_REQUEST['age'].'"></TD>
+  echo '<TD>'.$lang['year_in_major'].':</TD><TD><INPUT name=year_in_major type=text size=5 maxlength=3 value="'.$_REQUEST['year_in_major'].'"></TD>
+       </TR>';
+}
+
+function participant__form_total_years_in_college() {
+  global $lang;
+  tpr("years_in_college");
+  echo '<TD>'.$lang['years_in_college'].':</TD><TD><INPUT name=years_in_college type=text size=5 maxlength=3 value="'.$_REQUEST['years_in_college'].'"></TD>
        </TR>';
 }
 
@@ -489,6 +496,8 @@ function participant__form($form_title="",$button_title="",$form_type="") {
   participant__form_age();
 
   participant__form_year_in_major();
+
+  participant__form_total_years_in_college();
 
   if (!$admin) {
 
