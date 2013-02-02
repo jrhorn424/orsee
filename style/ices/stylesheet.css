@@ -9,7 +9,7 @@ body {
   font-weight: 400;
   margin: 0px 0px 2px 0px;
   font-size: 10pt;
-  color: black;
+  color: #333333;
 }
 
 table, thead, tbody, tr, td, th {
@@ -26,6 +26,10 @@ h1,h2,h3,h4,h5,h6 {
   text-decoration: none;
 }
 
+a {
+  color: #0088cc;
+  text-decoration: none;
+}
 
 /* Tables */
 table {

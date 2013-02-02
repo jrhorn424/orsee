@@ -10,11 +10,11 @@
 
 
 # color specificatiosn for body tag of html page
-body_bgcolor:	snow
-body_text:	#000000
-body_link:	#0000FF
-body_alink      #0000FF
-body_vlink:	#800080
+body_bgcolor:	#ffffff
+body_text:	#333333
+body_link:	#0088cc
+body_alink  #0088cc
+body_vlink:	#0088cc
 
 
 # experiment calendar colors
@@ -39,21 +39,21 @@ session_public_free_places:	green
 
 
 # menu colors
-menu_title:	white
-menu_item:	lightgrey
-menu_item_highlighted_background:	red
+menu_title:	#000000
+menu_item:	#333333
+menu_item_highlighted_background:	#FFFFFF
 
 
 # notification colors
-message_background:	coral
+message_background:	#3a87ad
 message_border:		blue
 
 
 # background for fields not supplied in a form, used only sparly
-missing_field:	orange
+missing_field:	#c09853
 
 # online survey colors
-os_missing_field:	orange
+os_missing_field:	#c09853
 
 # public area, experiment registration
 register_table_head1:	lightblue
