@@ -58,7 +58,7 @@ td
 }
 
 a, {
-  font-weight: bold;
+  /*font-weight: bold;*/
   font-size: 10pt;
 }
 
@@ -71,13 +71,13 @@ a, {
 
 /* Navigation */
 .menu_title {
-  color: white;
+  /*color: white;*/
   font-weight: bold;
   font-size: 9pt;
 }
 
 .menu_item {
-  font-weight: bold;
+  /*font-weight: bold;*/
   font-size: 9pt;
 }
 
