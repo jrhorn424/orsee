@@ -45,8 +45,8 @@ menu_item_highlighted_background:	#FFFFFF
 
 
 # notification colors
-message_background:	#3a87ad
-message_border:		blue
+message_background:	#87cefa
+message_border:		#87ceeb
 
 
 # background for fields not supplied in a form, used only sparly
