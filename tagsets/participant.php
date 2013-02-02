@@ -296,6 +296,13 @@ function participant__form_ethnicity() {
   <INPUT name=ethnicity type=text size=20 maxlength=30 value="'.$_REQUEST['ethnicity'].'"></TD></TR>';
 }
 
+function participant__form_year_in_major() {
+  global $lang;
+  tpr("year_in_major");
+  echo '<TD>'.$lang['year_in_major'].':</TD><TD><INPUT name=year_in_major type=text size=5 maxlength=3 value="'.$_REQUEST['age'].'"></TD>
+       </TR>';
+}
+
 function participant__check_work($required) {
   global $subpool, $errors__dataform, $lang;
   if ($required=="y") {
@@ -480,6 +487,8 @@ function participant__form($form_title="",$button_title="",$form_type="") {
   participant__form_ethnicity();
 
   participant__form_age();
+
+  participant__form_year_in_major();
 
   if (!$admin) {
 
