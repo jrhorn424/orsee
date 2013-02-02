@@ -8,14 +8,8 @@ function navigation($orientation="vertical",$icons=true) {
 
    if (!(isset($navigation_disabled) && $navigation_disabled)) {
 	if (isset($expadmindata['adminname'])) {
-		$now=time();
-		$current_user_data_box=$lang['admin_area'].'<BR>'.
-                	$lang['user'].': <FONT color="'.$color['menu_item'].'">'.
-                	$expadmindata['adminname'].'</FONT><BR>'.
-                	$lang['date'].': <FONT color="'.$color['menu_item'].'">'.
-                	time__format($expadmindata['language'],"",false,true,true,true,$now).'</FONT><BR>'.
-                	$lang['time'].': <FONT color="'.$color['menu_item'].'">'.
-                	time__format($expadmindata['language'],"",true,false,true,true,$now).'</FONT>';
+		$current_user_data_box=
+                	$lang['user'].':  '.$expadmindata['adminname'];
 		$navfile=file ("../admin/navigation.php");
 		}
 	   else {
