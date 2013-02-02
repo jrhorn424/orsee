@@ -288,6 +288,14 @@ function participant__form_age() {
        </TR>';
 }
 
+function participant__form_ethnicity() {
+  global $lang;
+  tpr("ethnicity");
+  echo '<TD>'.$lang['ethnicity'].':</TD>
+  <TD>
+  <INPUT name=ethnicity type=text size=20 maxlength=30 value="'.$_REQUEST['ethnicity'].'"></TD></TR>';
+}
+
 function participant__check_work($required) {
   global $subpool, $errors__dataform, $lang;
   if ($required=="y") {
@@ -468,6 +476,8 @@ function participant__form($form_title="",$button_title="",$form_type="") {
   participant__form_phone_number();
 
   participant__form_gender();
+
+  participant__form_ethnicity();
 
   participant__form_age();
 
