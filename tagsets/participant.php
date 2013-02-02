@@ -320,7 +320,7 @@ function participant__form_total_years_in_college() {
 function participant__form_gpa() {
   global $lang;
   tpr("gpa");
-  echo '<TD>'.$lang['gpa'].':</TD><TD><INPUT name=gpa type=text size=5 maxlength=3 value="'.$_REQUEST['gpa'].'"></TD>
+  echo '<TD>'.$lang['gpa'].':</TD><TD><INPUT name=gpa type=text size=5 maxlength=4 value="'.$_REQUEST['gpa'].'"></TD>
        </TR>';
 }
 
