@@ -40,7 +40,7 @@ session_public_free_places:	green
 
 # menu colors
 menu_title:	#000000
-menu_item:	#dccdcd
+menu_item:	#cdc9c9
 menu_item_highlighted_background:	#FFFFFF
 
 
