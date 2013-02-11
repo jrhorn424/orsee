@@ -84,7 +84,7 @@ include("header.php");
                 ' '.$lang['xxx_unsubscribed_participants_found'];
                 else echo participants__count_participants().'
                     '.$lang['xxx_participants_registered'];
-            echo ''
+            echo '';
 
 			if ($continue) {
 				$part_list=implode("','",$p_to_add);
