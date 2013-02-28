@@ -50,9 +50,9 @@ function helpers__select_numbers_relative($name,$prevalue,$begin,$end,$fillzeros
 		echo '<option value="'.$i.'"';
 		if ($i== (int) $prevalue) echo ' SELECTED';
                 echo '>';
-		echo helpers__pad_number($i,$fillzeros); 
+		echo helpers__pad_number($i,$fillzeros);
 		if ($current_time > 0) {
-			$utime=$current_time - ($i * 60 * 60); 
+			$utime=$current_time - ($i * 60 * 60);
 			echo ' ('.time__format($authdata['language'],"",false,false,true,true,$utime).')';
 			}
 		echo '</option>
@@ -71,7 +71,7 @@ function select__field_of_studies($preval,$varname) {
         echo '<SELECT name="'.$varname.'">';
         $query="SELECT *, ".$lang['lang']." AS stud
                 FROM ".table('lang')."
-		WHERE content_type='field_of_studies' 
+		WHERE content_type='field_of_studies'
                 ORDER BY ".$lang['lang'];
         $result=mysql_query($query);
         while ($line = mysql_fetch_assoc($result)) {
@@ -81,13 +81,14 @@ function select__field_of_studies($preval,$varname) {
                              ';
                         }
         echo '</SELECT>';
-} 
+}
 
 function select__begin_of_studies($preval,$varname) {
 	global $settings;
         if (!$preval) $preval=0;
         if (!$varname) $varname="begin_of_studies";
 
+        date_default_timezone_set(date_default_timezone_get());
         $now = (int) date("Y");
         $begin_of_studies_start=$now-$settings['begin_of_studies_years_backward'];
         $begin_of_studies_stop=$now+$settings['begin_of_studies_years_forward'];
@@ -113,16 +114,16 @@ function select__profession($preval,$varname) {
 	if (!$preval) $preval=0;
 	if (!$varname) $varname="profession";
         echo '<SELECT name="'.$varname.'">';
-        $query="SELECT *, ".table('lang').".".$lang['lang']." AS prof 
+        $query="SELECT *, ".table('lang').".".$lang['lang']." AS prof
                 FROM ".table('lang')."
-		WHERE content_type='profession' 
+		WHERE content_type='profession'
                 ORDER BY ".$lang['lang'];
 	$result=mysql_query($query);
 	while ($line = mysql_fetch_assoc($result)) {
                         echo '<OPTION value="'.$line['content_name'].'"';
                         if ($preval==$line['content_name']) echo ' SELECTED';
                         echo '>'.stripslashes($line['prof']).'</OPTION>
-                             '; 
+                             ';
 			}
         echo '</SELECT>';
 }
@@ -136,12 +137,12 @@ function experiment_ext_types__checkboxes($postvarname,$showvar,$checked="",$var
                 FROM ".table('experiment_types')." as texpt, ".table('lang')." as tlang
                 WHERE texpt.exptype_id=tlang.content_name
                 AND tlang.content_type='experiment_type'
-		AND texpt.enabled='y' 
+		AND texpt.enabled='y'
                 ORDER BY exptype_id";
 
         $result=mysql_query($query);
         while ($line = mysql_fetch_assoc($result)) {
-                echo '<INPUT type="checkbox" name="'.$postvarname.'['.$line[$var].']" 
+                echo '<INPUT type="checkbox" name="'.$postvarname.'['.$line[$var].']"
 					value="'.$line[$var].'"';
                 if ($checked[$line[$var]]) echo " CHECKED";
                 echo '>'.$line[$showvar];
@@ -162,8 +163,8 @@ function participant__subscription_checkboxes($postvarname,$subpool_id=-1,$check
                 WHERE texpt.exptype_id=tlang.content_name
                 AND tlang.content_type='experiment_type'
                 AND texpt.enabled='y'
-		AND tsub.experiment_types LIKE concat('%',texpt.exptype_name ,'%') 
-		AND tsub.subpool_id='".$subpool_id."' 
+		AND tsub.experiment_types LIKE concat('%',texpt.exptype_name ,'%')
+		AND tsub.subpool_id='".$subpool_id."'
                 ORDER BY exptype_id";
         $result=mysql_query($query);
         while ($line = mysql_fetch_assoc($result)) {
@@ -198,14 +199,14 @@ function select__question_type($preval,$varname) {
 function select__sessions($preval,$varname,$exp_id,$hide_nosession) {
 	global $lang, $expadmindata;
 
-	if (!$preval) $preval=0; 
+	if (!$preval) $preval=0;
 	if (!$varname) $varname="session";
-	if ($exp_id) {  
+	if ($exp_id) {
 			$query="SELECT *
                                 FROM ".table('sessions')."
 				WHERE experiment_id='".$exp_id."'
 				OR session_id=0
-                                ORDER BY session_start_year, session_start_month, session_start_day, 
+                                ORDER BY session_start_year, session_start_month, session_start_day,
                                  session_start_hour, session_start_minute";
 			$with_exp=false;
 			}
@@ -213,8 +214,8 @@ function select__sessions($preval,$varname,$exp_id,$hide_nosession) {
 			$query="SELECT *
                                 FROM ".table('sessions').", ".table('experiments')."
                                 WHERE ".table('sessions').".experiment_id=".table('experiments').".experiment_id
-				AND ".table('sessions').".session_finished='n' 
-                                ORDER BY session_start_year, session_start_month, session_start_day, 
+				AND ".table('sessions').".session_finished='n'
+                                ORDER BY session_start_year, session_start_month, session_start_day,
                                  session_start_hour, session_start_minute";
 			$with_exp=true;
 			}
