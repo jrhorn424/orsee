@@ -83,6 +83,25 @@ function select__field_of_studies($preval,$varname) {
         echo '</SELECT>';
 }
 
+function select__class_year($preval,$varname) {
+    global $lang;
+    if (!$preval) $preval=0;
+    if (!$varname) $varname="class_year";
+        echo '<SELECT name="'.$varname.'">';
+        $query="SELECT *, ".$lang['lang']." AS year
+                FROM ".table('lang')."
+        WHERE content_type='class_year'
+                ORDER BY ".$lang['lang'];
+        $result=mysql_query($query);
+        while ($line = mysql_fetch_assoc($result)) {
+                        echo '<OPTION value="'.$line['content_name'].'"';
+                        if ($preval==$line['content_name']) echo ' SELECTED';
+                        echo '>'.stripslashes($line['year']).'</OPTION>
+                             ';
+                        }
+        echo '</SELECT>';
+}
+
 function select__begin_of_studies($preval,$varname) {
 	global $settings;
         if (!$preval) $preval=0;

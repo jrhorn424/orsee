@@ -270,6 +270,15 @@ function participant__form_field_of_studies() {
         </TR>';
 }
 
+function participant__form_class_year() {
+  global $lang;
+  tpr("class_year");
+  echo '<TD>'.$lang['class_year'].':</TD>
+        <TD>';
+  select__field_of_studies($_REQUEST['class_year'],"class_year");
+  echo '</TD>
+        </TR>';
+}
 
 function participant__form_begin_of_studies() {
   global $lang;
@@ -509,7 +518,9 @@ function participant__form($form_title="",$button_title="",$form_type="") {
 
   participant__form_age();
 
-  participant__form_year_in_major();
+  // participant__form_year_in_major();
+
+  participant__form_class_year();
 
   participant__form_total_years_in_college();
 
