@@ -138,6 +138,29 @@ switch ($module) {
 	                </TABLE>';
 		break;
 
+    case "class_year":
+        echo '  <TABLE width=90%>
+                <TR>
+                    <TD>
+                        '.$lang['where_class_year_is'].'
+                        <select name="class_year_not">
+                            <OPTION value=""';
+                                                    if (!$_REQUEST['class_year_not'])
+                                    echo ' SELECTED';
+                                                    echo '></OPTION>
+                            <OPTION value="!"';
+                                if ($_REQUEST['class_year_not'])
+                                    echo ' SELECTED';
+                                echo '>'.$lang['not'].'</OPTION>
+                        </select> ';
+
+                        select__class_year($_REQUEST['class_year'],
+                                        "class_year");
+            echo '          </TD>
+                </TR>
+                    </TABLE>';
+        break;
+
         case "profession":
                 echo '  <TABLE width=90%>
                                 <TR>
@@ -474,6 +497,11 @@ switch ($module) {
 		$where_clause=table('participants').".field_of_studies ".$_REQUEST['field_of_studies_not']."= '".
 					$_REQUEST['field_of_studies']."'";
 		break;
+
+    case "class_year":
+        $where_clause=table('participants').".class_year ".$_REQUEST['class_year_not']."= '".
+                    $_REQUEST['class_year']."'";
+        break;
 
         case "profession":
                 $where_clause=table('participants').".profession ".$_REQUEST['profession_not']."= '".

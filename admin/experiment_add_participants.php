@@ -3,7 +3,7 @@ ob_start();
 
 $menu__area="experiments";
 $title="assign participants";
-$query_modules=array("field","noshowups","nr_participations","subjectpool","gender",
+$query_modules=array("field","class_year","noshowups","nr_participations","subjectpool","gender",
 			"study_start","field_of_studies","profession","experiment_classes",
 			"experiment_participated_or","experiment_participated_and",
 			"experiment_assigned_or","rand_subset");
