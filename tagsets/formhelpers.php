@@ -85,7 +85,7 @@ function select__field_of_studies($preval,$varname) {
 
 function select__class_year($preval,$varname) {
     global $lang;
-    if (!$preval) $preval=0;
+    if (!$preval) $preval="blank";
     if (!$varname) $varname="class_year";
         echo '<SELECT name="'.$varname.'">';
         $query="SELECT *, ".$lang['lang']." AS year
