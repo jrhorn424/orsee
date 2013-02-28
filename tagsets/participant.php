@@ -275,7 +275,7 @@ function participant__form_class_year() {
   tpr("class_year");
   echo '<TD>'.$lang['class_year'].':</TD>
         <TD>';
-  select__field_of_studies($_REQUEST['class_year'],"class_year");
+  select__class_year($_REQUEST['class_year'],"class_year");
   echo '</TD>
         </TR>';
 }
