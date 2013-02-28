@@ -91,7 +91,7 @@ function select__class_year($preval,$varname) {
         $query="SELECT *, ".$lang['lang']." AS year
                 FROM ".table('lang')."
         WHERE content_type='class_year'
-                ORDER BY ".$lang['lang'];
+                ORDER BY lang_id";
         $result=mysql_query($query);
         while ($line = mysql_fetch_assoc($result)) {
                         echo '<OPTION value="'.$line['content_name'].'"';
