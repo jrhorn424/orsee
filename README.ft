@@ -6,10 +6,13 @@ Familiarize yourself with the [Linode Documentation](http://library.linode.com/)
 If the server needs to be upgraded due to performance or disk space issues, it can be resized from the [Linode Manager](https://manager.linode.com/). Alternatively, RAM, storage, IP addresses, and bandwidth can be purchased from the `Extras` tab in the Linode.
 
 Currently, the server utilizes password-less SSH login, restricted to the user `jrhorn424`. This will need to be changed when another sysadmin takesover. To perform the transfer:
+
 1. Create the new user, add to admin group.
 2. Add the allowed user to `/etc/ssh/sshd_config`.
 3. Have the new user create an SSH key from their development machine. See the [OpenSSH Tutorial](http://www.linode.com/wiki/index.php/OpenSSH_Tutorial).
 4. Add the `.pub` key to the `~/.ssh/authorized_keys` file.
+
+In addition, changing plaintex passwords, like those used by `postfix` and `dovecot`, would be wise before completing a transfer.
 
 Live volunteers can always be found on in the [Linode Channel on IRC](irc://#linode@irc.oftc.net). 
 
@@ -21,3 +24,6 @@ Live volunteers can always be found on in the [Linode Channel on IRC](irc://#lin
 [Name.com](http://www.name.com), 10 year registration @ $9.90/yr. , plus 10 year whois privacy @ $3.99/yr.
 - DNS: Managed by [Name.com](https://www.name.com/domain/dns/ices-experiments.org)
 - Software: [ORSEE](http://www.orsee.org)
+
+### Mail
+`postfix` with MySQL and `dovecot`. This was cobbled together using the outdated guide provided by Linode and various StackOverflow and ServerFault questions. In short, forwarding is controlled by the `forwardings` table of the `mail` database, which is accessed by the `mail_admin` user.
