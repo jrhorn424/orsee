@@ -1,0 +1,82 @@
+/* Globals */
+body {
+  font-family: "pragmatica-web", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  margin: 0px 0px 2px 0px;
+  font-size: 10pt;
+  color: #333333;
+}
+
+table, thead, tbody, tr, td, th {
+  font-family: "pragmatica-web", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: "museo-slab", serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14pt;
+  text-decoration: none;
+}
+
+a {
+  color: #0088cc;
+  text-decoration: none;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+}
+
+th
+{
+  padding: 10px 8px;
+}
+
+td
+{
+  padding: 6px 8px;
+}
+
+
+/* Content */
+.small {
+  font-size: 90%;
+}
+
+.signature {
+    font-size: 8pt;
+    text-decoration: none;
+}
+
+a, {
+  /*font-weight: bold;*/
+  font-size: 10pt;
+}
+
+
+.title1 {
+  font-size: 14pt;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Navigation */
+.menu_title {
+  font-weight: bold;
+  font-size: 9pt;
+}
+
+.menu_item {
+  text-decoration: underline;
+  font-size: 9pt;
+}
+
+/* Logo */
+html>body>center>table>tbody>tr {
+  background-color: #432965;
+}
