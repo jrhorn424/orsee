@@ -53,11 +53,11 @@ $lang=load_language($authdata['language']);
                 redirect("public/");
                 }
 
-        if (isset($participant) && $participant['deleted']=="y") {
-                message ($lang['error_sorry_you_are_deleted']." ".
-                        $lang['if_you_have_questions_write_to']." ".support_mail_link());
-                redirect("public/");
-                }
+        // if (isset($participant) && $participant['deleted']=="y") {
+        //         message ($lang['error_sorry_you_are_deleted']." ".
+        //                 $lang['if_you_have_questions_write_to']." ".support_mail_link());
+        //         redirect("public/");
+        //         }
 
 
 if ($settings['stop_public_site']=="y" && !isset($expadmindata['adminname']) && !(thisdoc()=="disabled.php")) redirect("public/disabled.php");
