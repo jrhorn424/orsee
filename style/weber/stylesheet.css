@@ -75,8 +75,3 @@ a, {
   text-decoration: underline;
   font-size: 9pt;
 }
-
-/* Logo */
-html>body>center>table>tbody>tr {
-  background-color: #432965;
-}

@@ -1,8 +1,8 @@
 <center>
 <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%">
 	<TR VALIGN=TOP ALIGN=LEFT BGCOLOR="#FFF">
-		<TD COLSPAN=2 WIDTH=100% HEIGHT=19 ALIGN=RIGHT VALIGN=BOTTOM>
-		<IMG border=0 SRC="../style/weber/weber-logo.gif">
+		<TD COLSPAN=2 WIDTH=100% HEIGHT=19 ALIGN=RIGHT VALIGN=BOTTOM BACKGROUND-COLOR:#432965>
+		<IMG border=0 SRC="../style/weber/weber-logo.png">
 		</TD>
 	</TR>
 	<TR bgcolor="#FFF" valign=top align=center>
