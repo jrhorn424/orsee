@@ -4,3 +4,4 @@ docs/orsee_pub.pdf
 ices-recruiter.ft
 config/settings-production.php
 config/settings-staging.php
+config/settings.php
