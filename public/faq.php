@@ -3,13 +3,10 @@ ob_start();
 $menu__area="faqs";
 include("header.php");
 ?>
-<BR><BR>
-<TABLE width=70%>
-  <TR>
-    <TD>
-    </TD>
-  </TR>
-<TR><h2 id="faqs">FAQs</h2>
+
+<center>
+<TABLE width=70%><TR><TD>
+<h2 id="faqs">FAQs</h2>
 
 <p>If your question isn't answered below, please <a href="/contact">contact us</a>.</p>
 
@@ -64,10 +61,8 @@ experimenter who sent you the invitation. If it is about experiments and
 policy in general, contact Dr. Rong Rong at rongrong@weber.edu. Please
 take the time to read the FAQs section before you email her, as your
 question may already be answered.</p>
-</TR>
-<TR>
-</TR>
-</TABLE>
+</TD></TR></TABLE>
+
 </center>
 
 <?php
