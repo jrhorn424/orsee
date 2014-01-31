@@ -1,8 +1,8 @@
 <?php
 ob_start();
 $menu__area="faqs";
-
 include("header.php");
+?>
 
 <h2 id="faqs">FAQs</h2>
 
@@ -60,5 +60,6 @@ policy in general, contact Dr. Rong Rong at rongrong@weber.edu. Please
 take the time to read the FAQs section before you email her, as your
 question may already be answered.</p>
 
+<?php
 include ("footer.php");
 ?>
