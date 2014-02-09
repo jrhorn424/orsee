@@ -305,13 +305,6 @@ function participant__form_ethnicity() {
   <INPUT name=ethnicity type=text size=20 maxlength=30 value="'.$_REQUEST['ethnicity'].'"></TD></TR>';
 }
 
-function participant__form_years_in_nova() {
-  global $lang;
-  tpr("years_in_nova");
-  echo '<TD>'.$lang['years_in_nova'].':</TD><TD><INPUT name=years_in_nova type=text size=5 maxlength=3 value="'.$_REQUEST['years_in_nova'].'"></TD>
-       </TR>';
-}
-
 function participant__form_year_in_major() {
   global $lang;
   tpr("year_in_major");
@@ -525,8 +518,6 @@ function participant__form($form_title="",$button_title="",$form_type="") {
   participant__form_total_years_in_college();
 
   participant__form_gpa();
-
-  participant__form_years_in_nova();
 
   if (!$admin) {
 
